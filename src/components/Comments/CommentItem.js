@@ -7,14 +7,12 @@ const CommentWrapper = styled(BigCardWrapper)`
   display: flex;
   justify-content: space-between;
 `
-
 const Avatar = styled.div`
-  background: gray;
+  background: rgba(0, 0, 0, 0.1);
   height: 100px;
   width: 100px;
   border-radius: 50%;
 `
-
 const DataArea = styled.div`
   flex: 1;
   text-align: left;
@@ -49,7 +47,6 @@ const Edit = styled(Button)`
     border: 1px solid ${COLOR.gray_light};
     transition: all 0.3s;
   }
-
 `
 
 export default function CommentItem ({comment, handleCommentDelete}) {
@@ -68,7 +65,7 @@ export default function CommentItem ({comment, handleCommentDelete}) {
           </div>
           <div className = 'author__edit'>
             <Link><Edit>編輯</Edit></Link>
-            <Link onClick={() => handleCommentDelete(comment.id)}><Edit>刪除</Edit></Link>
+            <Link><Edit onClick={() => handleCommentDelete(comment.id)}>刪除</Edit></Link>
           </div>
         </AuthorDataWrapper>
 

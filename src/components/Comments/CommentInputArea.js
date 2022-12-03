@@ -11,7 +11,6 @@ const Textarea = styled.textarea`
   padding: 6px 0; 
   border: 1px solid white;
 `
-
 const BigButton = styled(Button)`
   width: 95%;
   padding: 8px 0;
@@ -21,14 +20,14 @@ const BigButton = styled(Button)`
   border: 1px solid ${COLOR.color3};
 `
 
-export default function CommentInputArea({handleCommentSubmit, newCommentContent, setNewCommentContent, fetchError}){
+export default function CommentInputArea({handleCommentSubmit, newCommentContent, fetchError, handleValueChange}){
   return(
     <BigCardWrapper className='CommentInputArea'>
       <Form onSubmit = { handleCommentSubmit } >
         <Textarea 
           placeholder='快來跟我們分享你的想法' 
           value = { newCommentContent } 
-          onChange = { e => setNewCommentContent(e.target.value) } 
+          onChange = { handleValueChange } 
         />
 
         {/* TODO: 顯示錯誤區塊待決定 */}
