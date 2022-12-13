@@ -9,6 +9,7 @@ const instance = axios.create({
 // perfume
 export const getPerfumeById = (perfumeId) => instance.get(`/perfume/${perfumeId}`);
 export const getVote = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote`);
+export const getVoteBoolean = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote_boolean`);
 
 //comment
 export const getComments = (perfumeId) => instance.get(`/perfume/${perfumeId}/init`);
