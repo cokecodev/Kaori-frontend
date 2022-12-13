@@ -5,7 +5,7 @@ import { COLOR } from "../constants/style"
 export const WidthWrapper = styled.div`
   box-sizing: border-box;
   margin: 15px auto;
-  max-width: 800px;
+  max-width: 768px;
   min-width: 300px;
 `
 
