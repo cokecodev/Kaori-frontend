@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import useGetOnePerfume from '../../hooks/perfumeHooks/useGetPerfumeData'
 import PerfumeBasicInfo from './PerfumeBasicInfo'
 import PerfumeShowVoteData from'./PerfumeShowVoteData'
+import { useEffect, useMemo } from "react"
 
 export default function PerfumeMain() {
   const perfumeId = Number(useParams().id)
@@ -13,10 +14,12 @@ export default function PerfumeMain() {
     ingredient,
     voteData,
     getPerfumeFetch,
-    getVoteFetch
+    getVoteFetch,
+    booleanVoteData,
+    getBooleanVoteFetch,
   } = useGetOnePerfume(perfumeId)
 
-  console.log('page perfume123',voteData)
+  console.log('page perfumeMain',voteData)
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function PerfumeMain() {
         perfume = { perfume }
         creator = { creator }
         ingredient = { ingredient }
-        voteData = { voteData }
+        booleanVoteData = { booleanVoteData }
       />
 
       <PerfumeShowVoteData
@@ -37,4 +40,3 @@ export default function PerfumeMain() {
   );
  
 }
-
