@@ -12,6 +12,7 @@ export const getVote = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vo
 export const getVoteBoolean = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote_boolean`);
 export const getVoteByUserId = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote_by_user`);
 export const VoteForPerfume = (perfumeId, payload) => instance.post(`/perfume/${perfumeId}/vote`, payload);
+export const getLatestFivePerfume = () => instance.get(`/latest_five_perfume`);
 
 //comment
 export const getComments = (perfumeId) => instance.get(`/perfume/${perfumeId}/init`);
