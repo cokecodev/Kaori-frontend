@@ -10,6 +10,9 @@ const instance = axios.create({
 export const getPerfumeById = (perfumeId) => instance.get(`/perfume/${perfumeId}`);
 export const getVote = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote`);
 export const getVoteBoolean = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote_boolean`);
+export const getVoteByUserId = (perfumeId) => instance.get(`/perfume/${perfumeId}/get_vote_by_user`);
+export const VoteForPerfume = (perfumeId, payload) => instance.post(`/perfume/${perfumeId}/vote`, payload);
+export const getLatestFivePerfume = () => instance.get(`/latest_five_perfume`);
 
 //comment
 export const getComments = (perfumeId) => instance.get(`/perfume/${perfumeId}/init`);
@@ -21,3 +24,4 @@ export const deleteComment = (perfumeId, commentId) => instance.delete(`/perfume
 export const loginApi = (payload) => instance.post('/login', payload)
 export const getMeApi = () => instance.get('/me')
 export const logoutApi = () => instance.get('/logout')
+export const registerApi = (payload) => instance.post('/register', payload)

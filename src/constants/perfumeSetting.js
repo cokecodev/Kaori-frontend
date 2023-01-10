@@ -10,6 +10,13 @@ const recommendArr = [
   {id:'night', name:"夜"}
 ]
 
+const IngredientRadioArr = [{ name:'沒啥味道', value: -1 },
+  { name: '普通', value: 0 },
+  { name: '會讓人注意到的', value: 1 },
+  { name: '強烈的', value: 2 },
+  { name: '非常強烈的', value: 3 }
+]
+
 const handleItemNameTranslate = (string) => {
   let name
   let describe
@@ -98,5 +105,6 @@ export {
   genderArr,
   silageArr,
   recommendArr,
+  IngredientRadioArr,
   handleItemNameTranslate
 }

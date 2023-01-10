@@ -1,11 +1,9 @@
 import styled from "styled-components"
 import { BigCardWrapper } from '../../components/general'
-
-import { COLOR, MEDIA_QUERY } from '../../constants/style' 
+import { MEDIA_QUERY } from '../../constants/style'
 import { Link } from "react-router-dom"
-import { useEffect, useMemo } from "react"
+import { useMemo } from "react"
 import { recommendArr } from '../../constants/perfumeSetting'
-
 import CreateRecommendItem from "./CreateRecommendItem"
 
 const PerfumeCardWrapper = styled(BigCardWrapper)`
@@ -13,7 +11,6 @@ const PerfumeCardWrapper = styled(BigCardWrapper)`
   justify-content: space-between;
   font-family: '微軟正黑體';
 `
-
 const PerfumePhoto = styled.div`
   width: 375px;
   height: 500px;
@@ -44,7 +41,6 @@ const InfoWrapper = styled.div`
     margin: 0 0 0 1.5rem;
     height: 100%;
   }
-
 `
 const BasicInfoContainer = styled.div`
   color: black;
@@ -198,18 +194,7 @@ export default function PerfumeBasicInfo({brand, perfume, creator, ingredient, b
 
             <IngredientContainer>
               { ingredient.length !==0 && ingredient.map(res => <IngredientItem key={res}> {res} </IngredientItem>) }
-              
-              { // 開發用
-                ingredient.length ===0 && (
-                <>
-                  <IngredientItem>龍岩香 </IngredientItem>
-                  <IngredientItem>鈺創木</IngredientItem>
-                  <IngredientItem>布林</IngredientItem>
-                </>
-              )}
-              
             </IngredientContainer>
-
 
             {/* TODO:　這邊裡面的版要重切 */}
             <RecommendArea>
@@ -233,6 +218,5 @@ export default function PerfumeBasicInfo({brand, perfume, creator, ingredient, b
       </PerfumeInfo>
       </PerfumeCardWrapper>
     </>
-  );
-
+  )
 }

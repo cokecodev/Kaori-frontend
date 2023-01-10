@@ -1,8 +1,7 @@
 import styled from "styled-components"
 
 import { WidthWrapper,Button } from '../../components/general' 
-import { COLOR } from '../../constants/style' 
-import { Link } from "react-router-dom"
+import { COLOR, MEDIA_QUERY } from '../../constants/style'
 const BACKGROUND_COLOR = 'white'
 
 const BlockLineContainer = styled(WidthWrapper)`
@@ -14,17 +13,29 @@ const BlockLine = styled.div`
   border-bottom: 5px solid ${COLOR.color3};
   position: absolute;
   z-index: -5;
+
+  ${MEDIA_QUERY.middle_breakpoint}{
+    margin: 20px 0;
+  }
 `
 const TextWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-left: 60px;
   justify-content: space-between;
+
+  ${MEDIA_QUERY.middle_breakpoint}{
+    margin-left: 30px;
+  }
 `
 const BlockName = styled.div`
   font-size: 2.5rem;
   background: ${BACKGROUND_COLOR};
   padding: 0 10px;
+
+  ${MEDIA_QUERY.middle_breakpoint}{
+    font-size: 2.15rem;
+  }
 `
 const SubTitle = styled(Button)`
   background: ${BACKGROUND_COLOR};
@@ -41,10 +52,10 @@ export default function BlockPartition(props) {
   return (
     <BlockLineContainer>
       <BlockLine></BlockLine>
-        <TextWrapper>
-          <BlockName>{props.children}</BlockName>
-          { props.subtitle && <Link><SubTitle> {props.subtitle} </SubTitle></Link> }
+        <TextWrapper className ='text-wrapper'>
+          <BlockName>{ props.children }</BlockName>
+          { props.subtitle && <SubTitle onClick = { props.handleClick } > {props.subtitle} </SubTitle> }
         </TextWrapper>
     </BlockLineContainer>
-  );
+  )
 }

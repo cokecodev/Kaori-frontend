@@ -3,9 +3,7 @@ import { COLOR, MEDIA_QUERY } from '../../constants/style'
 import { WidthWrapper} from "../general"
 import { useMemo } from "react"
 
-import BlockPartition from '../BlockPartition'
 import CreateProgressBar from './CreateProgressBar'
-
 import { longArr, genderArr, silageArr } from '../../constants/perfumeSetting'
 import { handleIngredientNote, handleTotalValue } from './functions'
 
@@ -70,15 +68,13 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
 
   return (
     <>
-      <BlockPartition subtitle = {'投票去'}>VOTES</BlockPartition>
-
       <VoteCardContainer>
-        <VoteCard className = {'ingredient-card'}>
+        <VoteCard className ='ingredient-card'>
           <div className ='card-title'>
             味道最明顯的成分
           </div>
           <Line/>
-          <div ClassName ='item-container'>
+          <div className ='item-container'>
             { voteData.length!==0 && (
               <CreateProgressBar
                 arr = { ingredientArr }
@@ -89,12 +85,12 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
         </VoteCard>
 
-        <VoteCard className ={'gender-card'}>
+        <VoteCard className ='gender-card'>
           <div className ='card-title'>
             性別
           </div>
           <Line/>
-          <div ClassName ='item-container'>
+          <div className ='item-container'>
             { voteData.length!==0 && (
               <CreateProgressBar
                 arr = { genderArr } 
@@ -105,12 +101,12 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
         </VoteCard>
 
-        <VoteCard className ={'longevity-card'}>
+        <VoteCard className ='longevity-card'>
           <div className ='card-title'>
             持香時間
           </div>
           <Line/>
-          <div ClassName ='item-container'>
+          <div className ='item-container'>
             { voteData.length!==0 && (
               <CreateProgressBar
                 arr = { longArr } 
@@ -121,12 +117,12 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
         </VoteCard>
 
-        <VoteCard className ={'silage-card'}>
+        <VoteCard className ='silage-card'>
           <div className ='card-title'>
             擴散度
           </div>
           <Line/>
-          <div ClassName ='item-container'>
+          <div className ='item-container'>
             { voteData.length!==0 && (
               <CreateProgressBar
                 arr = { silageArr } 
@@ -139,5 +135,5 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
 
       </VoteCardContainer>
     </>
-  );
+  )
 }
