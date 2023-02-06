@@ -46,6 +46,9 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
   const handleFinishButtonClick = (e) => {
     if (isNewVote === false) { return handleToggleHidden() }
     const inputVoteObj = handleVoteObj()
+    if(inputVoteObj.longevity.length === 0 || inputVoteObj.silage.length === 0 || inputVoteObj.gender.length === 0 || inputVoteObj.ingredient.length === 0) {
+      return alert('最後三項為必投項目，最明顯的味道至少需投一種')
+    }
 
     VoteForPerfume(perfumeId, inputVoteObj)
       .then(res => {
@@ -91,7 +94,8 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
           vote: Number(target.value)
         }
         // ingredientVote 是字串!
-        const temArr = JSON.parse(ingredientVote)
+        let temArr 
+        ingredientVote.length === 0 ? (temArr = []) : (temArr = JSON.parse(ingredientVote))
         const filter = temArr.filter(res => res.name !== target.name)
         const newArr = [...filter, obj]
         const payload = JSON.stringify(newArr)
@@ -212,7 +216,8 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
       if(voteData.length === 0) return
       const temArr = JSON.parse(voteData)
       const filter = temArr.filter(res => res.name === radioName)
-      const voteValue = Number(filter[0].vote)
+      let voteValue = null
+      if(filter.length !== 0 ) voteValue = Number(filter[0].vote)
 
       if (voteValue === radioValue) return true
       return false
