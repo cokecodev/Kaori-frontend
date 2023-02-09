@@ -17,6 +17,10 @@ const PerfumePhoto = styled.div`
   background: rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.1);
 
+  & .photo__url {
+    width: 100%;
+  }
+
   ${MEDIA_QUERY.mobile} {
     width: 250px;
     height: 330px;
@@ -178,27 +182,29 @@ export default function PerfumeBasicInfo({brand, perfume, creator, ingredient, b
     <>
       <PerfumeCardWrapper>
       <PerfumePhoto>
-        <div className='photoWrapper'>
-          photo URL
+        <div className ='photo__wrapper'>
+          { 
+            perfume.length !==0 && <img className ='photo__url' src = { require(`../Photo/${perfume.perfumeName}.jpg`) } /> 
+          }
         </div>
       </PerfumePhoto>
       
       <PerfumeInfo>  {/*這片要做錯誤處理，有perfume 的話才render */}
-          <InfoWrapper className='info-wrapper'>
-            <BasicInfoContainer className= 'basic-information remember-to-delete'>
-              <BrandName className="brand-name"><Link>{ brand.brandName || "Le Labo" }</Link></BrandName>
-              <PerfumeName className="perfume-name">{ perfume.perfumeName || "THe Nord29" }</PerfumeName>
-              <PerfumeGroup className="perfume-group">{ perfume.group || '木質辣'}</PerfumeGroup>
-              <CreatorName className='creator-name'><Link>調香師 : { creator.creatorName || 'Alberto Morillas'}</Link></CreatorName>
+          <InfoWrapper className ='info__wrapper'>
+            <BasicInfoContainer className ='basic__information'>
+              <BrandName className ='brand__name'><Link>{ brand.brandName || 'Le Labo' }</Link></BrandName>
+              <PerfumeName className ='perfume__name'>{ perfume.perfumeName || 'THe Nord29' }</PerfumeName>
+              <PerfumeGroup className ='perfume__group'>{ perfume.group || '木質辣'}</PerfumeGroup>
+              <CreatorName className ='creator__name'><Link>調香師 : { creator.creatorName || 'Alberto Morillas'}</Link></CreatorName>
             </BasicInfoContainer>
 
             <IngredientContainer>
-              { ingredient.length !==0 && ingredient.map(res => <IngredientItem key={res}> {res} </IngredientItem>) }
+              { ingredient.length !==0 && ingredient.map(res => <IngredientItem key = { res } > {res} </IngredientItem>) }
             </IngredientContainer>
 
             {/* TODO:　這邊裡面的版要重切 */}
             <RecommendArea>
-              <div className='title'> 大家推薦的使用時機:</div>
+              <div className ='title'> 大家推薦的使用時機:</div>
               <Line/>
 
               { recommendArr.map(item => { return (
