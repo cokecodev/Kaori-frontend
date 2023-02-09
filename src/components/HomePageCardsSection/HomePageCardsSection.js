@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { getLatestFivePerfume } from '../../WebAPI'
 
 import { WidthWrapper } from "../general"
-import A from "../Photo/A.png"
 const TRANSLATION ='all .5s'
 
 
@@ -40,7 +39,7 @@ const SmallCard = styled.div`
     transform: translate(-50%, -50%);
 
     font-size: 1.25rem;
-    color: rgba(255, 255, 255,0.4);
+    color: rgba(255, 255, 255, 0.75);
     font-weight: bold;
   }
 
@@ -61,6 +60,7 @@ const SmallCard = styled.div`
 `
 const EmptyCard = styled.div`
   width: 250px;
+  margin: 5px;
 `
 
 const Photo = styled.img`
@@ -79,7 +79,9 @@ const CreatePerfumeCards = ({perfumes}) => {
           <div className ='container'>
             <div className ='cover'/>
             <p>{res.perfumeName}</p>
-            <Photo src = { A } />
+            <Photo 
+              src = { require(`../Photo/${res.perfumeName}.jpg`) } 
+            />
           </div>
         </Link>
       </SmallCard>
@@ -114,16 +116,8 @@ export default function HomePageCardsSection() {
 
   return (
     <CardsWrapper>
-      <SmallCard>
-          <div className ='container'>
-            <div className ='cover'/>
-            <p> perfumeName</p>
-            <Photo src = { A } />
-          </div>
-      </SmallCard>
-
       <CreatePerfumeCards perfumes = { perfumes } />
-      < EmptyCard/>
+      <EmptyCard/>
     </CardsWrapper>
   )
 }
