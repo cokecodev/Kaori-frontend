@@ -3,11 +3,11 @@ import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } f
 import { useNavigate, Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser } from "../../features/userReducer"
-import useInput from '../../hooks/useInput'
+import useInputWithoutBlank from '../../hooks/useInputWithoutBlank'
 
 export default function Login() {
-  const {value: username, handleChange: handleUsernameChange} = useInput()
-  const {value: password, handleChange: handlePasswordChange} = useInput()
+  const {value: username, handleChange: handleUsernameChange} = useInputWithoutBlank()
+  const {value: password, handleChange: handlePasswordChange} = useInputWithoutBlank()
   const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()

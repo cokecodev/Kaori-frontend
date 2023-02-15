@@ -4,15 +4,15 @@ import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } f
 import { useNavigate, Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUser, register } from "../../features/userReducer"
-import useInput from '../../hooks/useInput'
+import useInputWithoutBlank from '../../hooks/useInputWithoutBlank'
 
 const SignUpButton = styled(LoginButton)``
 
 
 export default function Register() {
-  const { value: RegisterUsername, handleChange: handleRegisterUsernameChange} = useInput()
-  const { value: RegisterNickname, handleChange: handleRegisterNicknameChange} = useInput()
-  const { value: RegisterPassword, handleChange: handleRegisterPasswordChange} = useInput()
+  const { value: RegisterUsername, handleChange: handleRegisterUsernameChange} = useInputWithoutBlank()
+  const { value: RegisterNickname, handleChange: handleRegisterNicknameChange} = useInputWithoutBlank()
+  const { value: RegisterPassword, handleChange: handleRegisterPasswordChange} = useInputWithoutBlank()
   const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
