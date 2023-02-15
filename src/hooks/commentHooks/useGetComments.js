@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { createComment, getComments, deleteComment } from '../../WebAPI'
 import useInput from '../../hooks/useInput'
+import checkIsInputAllBlank from '../../utils'
 
 export default function useGetComments(perfumeId) {
   const [comments, setComments] = useState([])
@@ -32,8 +33,12 @@ export default function useGetComments(perfumeId) {
     e.preventDefault()
     setFetchError('')
 
-    if(!newCommentContent){
+    if(!newCommentContent) {
       return alert('請完整填寫')
+    }
+
+    if(checkIsInputAllBlank(newCommentContent)!== false) {
+      return alert('不能只輸入空白!')
     }
 
     const payload = {

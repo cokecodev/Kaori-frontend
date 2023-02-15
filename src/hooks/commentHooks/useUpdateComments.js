@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { updateComment } from '../../WebAPI'
+import checkIsInputAllBlank from '../../utils'
 
 export default function useUpdateComments(perfumeId, comments, getCommentFetch) {
   const [isUpdateHidden, setIsUpdateHidden] = useState(true)
@@ -50,7 +51,11 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
       setCurrentComment('')
       setOriginComment('')
       return setIsUpdateHidden(!isUpdateHidden)
-    } 
+    }
+
+    if(checkIsInputAllBlank(currentComment)!== false) {
+      return alert('不能只輸入空白!')
+    }
     
     // 內容有更動的話
     let commentId = currentCommentId
