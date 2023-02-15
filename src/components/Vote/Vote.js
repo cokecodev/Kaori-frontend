@@ -65,6 +65,10 @@ const SmallCardContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `
+const EmptySmallCard = styled.div`
+  width: 300px;
+  padding: 8px 0;
+`
 const TitleWrapper = styled.div`
   width: 85%;
   margin: 0 auto;
@@ -141,6 +145,8 @@ export default function VoteArea({ ingredient, currentUser, isVoteHidden, setIsV
                     />
                   ) 
                 }
+                
+                <EmptySmallCard />
               </SmallCardContainer>
             </SquareArea>
 
