@@ -34,3 +34,25 @@ export const Error = styled.div`
   font-size: 15px;
   margin: 6px;
 `
+
+let TITLE_COLOR = 'rgba(0,0,0,0.4)'
+export const PageDescribeTitle = styled.div`
+  color: ${TITLE_COLOR};
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-right: 5px;
+ 
+  &:before {
+    content:'';
+    background: ${TITLE_COLOR};
+    width: 10px;
+    height: 1.5rem;
+    display: inline-box;
+  }
+`
+
+export const PageSubTitle = styled.p`
+  color: gray;
+  font-size: 1rem;
+  margin-top: 1rem;
+`
