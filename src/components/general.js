@@ -56,3 +56,18 @@ export const PageSubTitle = styled.p`
   font-size: 1rem;
   margin-top: 1rem;
 `
+
+// 56px Header / 50px Footer / 100px Footer margin
+export const GeneralPageWrapper = styled.div`
+  min-height:calc(100vh - 56px - 50px - 100px);
+`
+
+// 56px Header / 50px Footer / 100px Footer margin / 15px ?margin
+export const PerfumePageWrapper = styled.div`
+  min-height:calc(100vh - 56px - 50px - 100px - 15px);
+`
+
+// 56px Header / 50px Footer / 100px Footer margin / 100px FloatCardWrapper margin
+export const LoginPageWrapper = styled.div`
+  height: calc(100vh - 56px - 50px - 200px);
+`
