@@ -1,10 +1,12 @@
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+import { getPerfumeByBrandId, getBrandById } from '../../WebAPI'
+import { GeneralPageWrapper } from '../../components/general'
 import Banner from '../../components/Banner'
 import BrandInfoCard from '../../components/BrandInfoCard'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
-
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { getPerfumeByBrandId, getBrandById } from '../../WebAPI'
+import NoPerfumeMessage from '../../components/NoPerfumeMessage'
 
 
 export default function BrandPage() {
@@ -44,14 +46,16 @@ export default function BrandPage() {
   },[])
 
   return (
-    <>
+    <GeneralPageWrapper>
       <Banner
         imgName = { 'G' }
         title = { '與心儀的品牌相遇吧 !' }
         searchType = { 'brand' }
       />
-      <BrandInfoCard brand = { brand } />
-      <HomePageCardsSection perfumes = { perfumes } />
-    </>
+      { brand.length !==0 && <BrandInfoCard brand = { brand } /> }
+      
+      { perfumes.length !== 0 && <HomePageCardsSection perfumes = { perfumes } /> }
+      { perfumes.length === 0 && <NoPerfumeMessage message = { '目前還沒有相關的資料呦' } /> }
+    </GeneralPageWrapper>
   )
 }

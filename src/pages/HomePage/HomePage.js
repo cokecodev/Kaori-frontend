@@ -1,10 +1,10 @@
-import Banner from "../../components/Banner"
-import HomePageCardsSection from "../../components/HomePageCardsSection"
+import { useEffect, useState } from 'react'
 
-import { useEffect, useState } from "react"
 import { getLatestFivePerfume } from '../../WebAPI'
 import { COLOR } from '../../constants/style'
-import { PageDescribeTitle } from '../../components/general'
+import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
+import Banner from '../../components/Banner'
+import HomePageCardsSection from '../../components/HomePageCardsSection'
 
 
 export default function HomePage() {
@@ -28,7 +28,7 @@ export default function HomePage() {
   },[])
 
   return (
-    <>
+    <GeneralPageWrapper>
       <Banner 
         title = 'Welcome to Kaori !'
         titleColor = { `${COLOR.text_light}` }
@@ -39,8 +39,8 @@ export default function HomePage() {
       <PageDescribeTitle> 最新加入的五款香水 </PageDescribeTitle>      
       
       { // perfume cards
-        perfumes && perfumes.length !==0 &&<HomePageCardsSection perfumes = { perfumes } />
+        perfumes.length !== 0 && <HomePageCardsSection perfumes = { perfumes } />
       }
-    </>
+    </GeneralPageWrapper>
   )
 }

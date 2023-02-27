@@ -1,12 +1,12 @@
-import styled from "styled-components"
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { getAllCreator, selectCreatorList } from "../../features/searchReducer"
+import styled from 'styled-components'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCreator, selectCreatorList } from '../../features/searchReducer'
 
 import Banner from '../../components/Banner'
 import CreatorInfoCard from '../../components/CreatorInfoCard'
-import { PageDescribeTitle } from '../../components/general'
+import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
 
 const TitleWithMargin = styled(PageDescribeTitle)`
   margin-bottom: 50px;
@@ -22,7 +22,7 @@ export default function BrandPage() {
 
 
   return (
-    <>
+    <GeneralPageWrapper>
       <Banner
         imgName = { 'C' }
         titleColor = { 'white' }
@@ -47,6 +47,6 @@ export default function BrandPage() {
         })
       }
 
-    </>
+    </GeneralPageWrapper>
   )
 }

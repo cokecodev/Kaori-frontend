@@ -1,9 +1,11 @@
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
 import Banner from '../../components/Banner'
 import CreatorInfoCard from '../../components/CreatorInfoCard'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
-
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import NoPerfumeMessage from '../../components/NoPerfumeMessage'
+import { GeneralPageWrapper } from '../../components/general'
 import { getPerfumeByCreatorId, getCreatorById } from '../../WebAPI'
 
 export default function CreatorPage() {
@@ -42,14 +44,16 @@ export default function CreatorPage() {
   },[])
 
   return (
-    <>
+    <GeneralPageWrapper>
       <Banner
         imgName = { 'G' }
         title = { '來探索同頻的調香師吧 !' }
         searchType = { 'creator' }
       />
-      <CreatorInfoCard creator = { creator } />
-      <HomePageCardsSection perfumes = { perfumes } />
-    </>
+      { creator.length !== 0 && <CreatorInfoCard creator = { creator } /> }
+
+      { perfumes.length !== 0 && <HomePageCardsSection perfumes = { perfumes } /> }
+      { perfumes.length === 0 && <NoPerfumeMessage message = { '目前還沒有相關的資料呦' } /> }
+    </GeneralPageWrapper>
   )
 }

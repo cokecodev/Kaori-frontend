@@ -1,12 +1,12 @@
-import styled from "styled-components"
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { getAllBrand, selectBrandList } from "../../features/searchReducer"
+import styled from 'styled-components'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllBrand, selectBrandList } from '../../features/searchReducer'
 
 import Banner from '../../components/Banner'
 import BrandInfoCard from '../../components/BrandInfoCard'
-import { PageDescribeTitle } from '../../components/general'
+import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
 
 
 const TitleWithMargin = styled(PageDescribeTitle)`
@@ -23,7 +23,7 @@ export default function BrandListPage() {
 
 
   return (
-    <>
+    <GeneralPageWrapper>
       <Banner
         imgName = { 'C' }
         titleColor = { 'white' }
@@ -47,6 +47,6 @@ export default function BrandListPage() {
         })
       }
 
-    </>
+    </GeneralPageWrapper>
   )
 }
