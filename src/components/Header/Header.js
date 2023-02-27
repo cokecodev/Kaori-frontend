@@ -1,9 +1,12 @@
 import styled from 'styled-components'
-import { COLOR, MEDIA_QUERY } from '../../constants/style'
-import { Button, WidthWrapper } from "../general"
+import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, selectUser } from '../../features/userReducer'
+
+import { COLOR, MEDIA_QUERY } from '../../constants/style'
+import { Button, WidthWrapper } from '../general'
+
 
 const HeaderContainer = styled.div`
   background: ${COLOR.color2};
@@ -25,12 +28,11 @@ const LeftPart = styled.div`
   display: flex;
   align-items: baseline;
   
-  & .siteLogo a {
+  & .logo a {
     font-size: 30px;
     color: #3b4446;
   }
 `
-
 const RightPart = styled.div`
   align-items: center;
 
@@ -45,6 +47,8 @@ const RightPart = styled.div`
     & a {
       color: ${COLOR.color1};
       margin-right: 5px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid ${COLOR.color2};
     
       &:hover {
         color: white;
@@ -59,16 +63,20 @@ const RightPart = styled.div`
       }
     }
 
+    & a:hover {
+      border-bottom: 1px solid ${COLOR.color1};
+      transition: all 0.5s;
+    }
   }
 `
 
 export default function Header() {
+  const path = useLocation().pathname
   const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
 
   const handleLogoutClick = () => {
     dispatch(logout())
-    // TODO: 成功訊息要顯示在哪?
     alert('登出成功')
   }
 
@@ -76,14 +84,14 @@ export default function Header() {
     <HeaderContainer>
       <Wrapper>
         <LeftPart className = 'left-part'>
-          <span className = 'siteLogo'><Link to = '/'>Kaori</Link></span>
+          <span className = 'logo'><Link to = '/'>Kaori</Link></span>
         </LeftPart>
       
         <RightPart className = 'right-part'>
           <span className = 'subNav'>
-            <Link to = '/list/creator'>找調香師</Link>
-            <Link to = '/list/perfume'>找香水</Link>
-            <Link to = '/list/brand'>找品牌</Link>
+              { path !== '/list/creator' && <Link to = '/list/creator'>找調香師</Link> }
+              { path !== '/list/perfume' && <Link to = '/list/perfume'>找香水</Link> }
+              { path !== '/list/brand' &&  <Link to = '/list/brand'>找品牌</Link> }
           </span>
 
           { currentUser && <Button onClick = { handleLogoutClick } >登出</Button> }
