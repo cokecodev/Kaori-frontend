@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { selectUser } from "../../features/userReducer"
 
-import { Error } from "../general"
+import { Error } from '../general'
 import BlockPartition from '../BlockPartition'
 import CommentInputArea from'./CommentInputArea'
 import CommentItem from'./CommentItem'
@@ -9,9 +11,6 @@ import EditComment from'../EditComment'
 
 import useGetComments from '../../hooks/commentHooks/useGetComments'
 import useUpdateComments from '../../hooks/commentHooks/useUpdateComments'
-
-import { useSelector } from 'react-redux'
-import { selectUser } from '../../features/userReducer'
 
 
 export default function Comments() {
@@ -47,7 +46,7 @@ export default function Comments() {
         handleValueChange = { handleValueChange }
       />
 
-      { comments.length === 0 && <CommentEmptyMessage/> }
+      { comments.length === 0 && <CommentEmptyMessage currentUser = { currentUser }/> }
       { comments.length !== 0 && (comments.map(comment => <CommentItem key = {comment.id} comment = {comment} currentUser = { currentUser } handleCommentDelete = { handleCommentDelete } handleUpdateButtonClick = { handleUpdateButtonClick } /> ))  }
 
       { <EditComment
@@ -63,5 +62,5 @@ export default function Comments() {
         { fetchError && 'Error:'}{fetchError}
       </Error>
     </>
-  );
+  )
 }
