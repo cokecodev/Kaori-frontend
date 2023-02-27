@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from '../Login/styleForComponent'
+import { LoginPageWrapper, FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from '../Login/styleForComponent'
 
 import { useNavigate, Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
@@ -35,41 +35,43 @@ export default function Register() {
   }
 
   return (
-    <FloatCardWrapper>
-      <PageTitle>REGISTER</PageTitle>
-      <form onSubmit = { handleRegisterSubmit } >
+    <LoginPageWrapper>
+      <FloatCardWrapper>
+        <PageTitle>REGISTER</PageTitle>
+        <form onSubmit = { handleRegisterSubmit } >
 
-        <InputWrapper className = 'username'>
-          <input
-            type = 'text'
-            value = { RegisterUsername }
-            onChange = { handleRegisterUsernameChange }
-            placeholder = '帳號'
-          />
-        </InputWrapper>
+          <InputWrapper className = 'username'>
+            <input
+              type = 'text'
+              value = { RegisterUsername }
+              onChange = { handleRegisterUsernameChange }
+              placeholder = '帳號'
+            />
+          </InputWrapper>
 
-        <InputWrapper className = 'nickname'>
-          <input 
-            type = 'text'
-            value = { RegisterNickname }
-            onChange = { handleRegisterNicknameChange }
-            placeholder = '暱稱，想讓大家怎麼稱呼你 ?'
-          />
-        </InputWrapper>
+          <InputWrapper className = 'nickname'>
+            <input 
+              type = 'text'
+              value = { RegisterNickname }
+              onChange = { handleRegisterNicknameChange }
+              placeholder = '暱稱，想讓大家怎麼稱呼你 ?'
+            />
+          </InputWrapper>
 
-        <InputWrapper className = 'password'>
-          <input
-            type = 'password'
-            value = { RegisterPassword }
-            onChange = { handleRegisterPasswordChange }
-            placeholder = '密碼'
-          />
-        </InputWrapper>
-          
-        <LinkWrapper><Link to='/login'>已經有帳號? 前往登入</Link></LinkWrapper>
-        <SignUpButton>註冊</SignUpButton>
+          <InputWrapper className = 'password'>
+            <input
+              type = 'password'
+              value = { RegisterPassword }
+              onChange = { handleRegisterPasswordChange }
+              placeholder = '密碼'
+            />
+          </InputWrapper>
+            
+          <LinkWrapper><Link to='/login'>已經有帳號? 前往登入</Link></LinkWrapper>
+          <SignUpButton>註冊</SignUpButton>
 
-      </form>
-    </FloatCardWrapper>
+        </form>
+      </FloatCardWrapper>
+    </LoginPageWrapper>
   )
 }

@@ -1,6 +1,10 @@
 import styled from "styled-components"
 import { COLOR } from "../../constants/style"
 
+// 56px Header / 50 Footer / 200 margin
+export const LoginPageWrapper = styled.div`
+  height: calc(100vh - 56px - 50px - 200px);
+`
 export const FloatCardWrapper = styled.div`
   width: 300px;
   margin: 100px auto;
