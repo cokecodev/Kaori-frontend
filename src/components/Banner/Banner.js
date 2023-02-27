@@ -1,4 +1,8 @@
-import styled from "styled-components"
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { searchPerfume, searchBrand, searchCreator } from '../../features/searchReducer'
+
 import useInput from '../../hooks/useInput'
 
 
@@ -29,24 +33,35 @@ const SearchBar = styled.input`
 `
 
 
-const handlePerfumeSearchSubmit = (e) => {
-  e.preventDefault()
-  return alert('A submit !')
-}
-
-const handleBrandSearchSubmit = (e) => {
-  e.preventDefault()
-  return alert('B submit !')
-}
-
-const handleCreatorSearchSubmit = (e) => {
-  e.preventDefault()
-  return alert('C submit !')
-}
-
-
 export default function Banner({ searchType, title, titleColor, imgName }) {
   const { value: searchValue, setValue: setSearchValue, handleChange: handleSearchBarChange } = useInput()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handlePerfumeSearchSubmit = (e) => {
+    e.preventDefault()
+    const payload = {
+      search: searchValue,
+    }
+    dispatch(searchPerfume(navigate, payload))
+  }
+
+  const handleBrandSearchSubmit = (e) => {
+    e.preventDefault()
+    const payload = {
+      search: searchValue,
+    }
+    dispatch(searchBrand(payload))
+  }
+  
+  const handleCreatorSearchSubmit = (e) => {
+    const payload = {
+      search: searchValue,
+    }
+    dispatch(searchCreator(payload))
+    e.preventDefault()
+  }
+
 
   return (
     <>
