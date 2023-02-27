@@ -19,12 +19,14 @@ const ColorButton = styled(Button)`
   }
 `
 
-export default function CommentEmptyMessage() {
+export default function CommentEmptyMessage({currentUser}) {
   return(
     <BigCardWrapper>
       <MessageContent>
-        {`目前還沒有人留言喔~快來分享你的看法`}
-        <Link to='/login'><ColorButton>登入</ColorButton></Link>
+        { `目前還沒有人留言喔~快來分享你的看法` }
+        { !currentUser && (
+          <Link to = '/login' ><ColorButton>登入</ColorButton></Link>
+        )}
       </MessageContent>
     </BigCardWrapper>
   )
