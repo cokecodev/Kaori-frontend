@@ -1,8 +1,8 @@
-import { LoginPageWrapper, FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from './styleForComponent'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, selectUser } from '../../features/userReducer'
 
-import { useNavigate, Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "../../features/userReducer"
+import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from './styleForComponent'
 import useInputWithoutBlank from '../../hooks/useInputWithoutBlank'
 
 export default function Login() {
@@ -30,32 +30,30 @@ export default function Login() {
   }
 
   return (
-    <LoginPageWrapper>
-      <FloatCardWrapper>
-        <PageTitle>LOGIN</PageTitle>
-        <form onSubmit = { handleLoginSubmit } >
-          <InputWrapper className = 'username'>
-            <input
-              type = 'text'
-              value = { username }
-              onChange = { handleUsernameChange }
-              placeholder = '帳號'
-              />
-          </InputWrapper>
-          <InputWrapper className = 'password'>
-            <input
-              type = 'password'
-              value = { password }
-              onChange = { handlePasswordChange }
-              placeholder = '密碼'
+    <FloatCardWrapper>
+      <PageTitle>LOGIN</PageTitle>
+      <form onSubmit = { handleLoginSubmit } >
+        <InputWrapper className = 'username'>
+          <input
+            type = 'text'
+            value = { username }
+            onChange = { handleUsernameChange }
+            placeholder = '帳號'
             />
-          </InputWrapper>
+        </InputWrapper>
+        <InputWrapper className = 'password'>
+          <input
+            type = 'password'
+            value = { password }
+            onChange = { handlePasswordChange }
+            placeholder = '密碼'
+          />
+        </InputWrapper>
 
-          <LinkWrapper><Link to ='/register' >還沒有帳號? 前往註冊</Link></LinkWrapper>
-          <LoginButton>登入</LoginButton>
-        
-        </form>
-      </FloatCardWrapper>
-    </LoginPageWrapper>
+        <LinkWrapper><Link to = '/register' >還沒有帳號? 前往註冊</Link></LinkWrapper>
+        <LoginButton>登入</LoginButton>
+      
+      </form>
+    </FloatCardWrapper>
   )
 }

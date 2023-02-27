@@ -1,9 +1,9 @@
-import styled from "styled-components"
-import { LoginPageWrapper, FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from '../Login/styleForComponent'
+import styled from 'styled-components'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUser, register } from '../../features/userReducer'
 
-import { useNavigate, Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { selectUser, register } from "../../features/userReducer"
+import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from '../Login/styleForComponent'
 import useInputWithoutBlank from '../../hooks/useInputWithoutBlank'
 
 const SignUpButton = styled(LoginButton)``
@@ -35,7 +35,7 @@ export default function Register() {
   }
 
   return (
-    <LoginPageWrapper>
+    <>
       <FloatCardWrapper>
         <PageTitle>REGISTER</PageTitle>
         <form onSubmit = { handleRegisterSubmit } >
@@ -67,11 +67,11 @@ export default function Register() {
             />
           </InputWrapper>
             
-          <LinkWrapper><Link to='/login'>已經有帳號? 前往登入</Link></LinkWrapper>
+          <LinkWrapper><Link to = '/login'>已經有帳號? 前往登入</Link></LinkWrapper>
           <SignUpButton>註冊</SignUpButton>
 
         </form>
       </FloatCardWrapper>
-    </LoginPageWrapper>
+    </>
   )
 }
