@@ -1,10 +1,11 @@
-import styled from "styled-components"
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { useMemo } from 'react'
+
 import { BigCardWrapper } from '../../components/general'
 import { MEDIA_QUERY } from '../../constants/style'
-import { Link } from "react-router-dom"
-import { useMemo } from "react"
 import { recommendArr } from '../../constants/perfumeSetting'
-import CreateRecommendItem from "./CreateRecommendItem"
+import CreateRecommendItem from './CreateRecommendItem'
 
 const PerfumeCardWrapper = styled(BigCardWrapper)`
   display: flex;
@@ -72,10 +73,6 @@ const PerfumeGroup = styled.div`
   padding: 5px 10px;
   background: rgba(0,0,0,0.2);
   color: white;
-
-  &:hover {
-    cursor: pointer;
-  }
 
   ${MEDIA_QUERY.middle_breakpoint} {
     font-size: 0.7rem;
@@ -184,25 +181,24 @@ export default function PerfumeBasicInfo({brand, perfume, creator, ingredient, b
       <PerfumePhoto>
         <div className ='photo__wrapper'>
           { 
-            perfume.length !==0 && <img className ='photo__url' src = { require(`../Photo/${perfume.perfumeName}.jpg`) } /> 
+            perfume.length !== 0 && <img className ='photo__url' src = { require(`../Photo/${perfume.perfumeName}.jpg`) } /> 
           }
         </div>
       </PerfumePhoto>
       
-      <PerfumeInfo>  {/*這片要做錯誤處理，有perfume 的話才render */}
+      <PerfumeInfo>
           <InfoWrapper className ='info__wrapper'>
             <BasicInfoContainer className ='basic__information'>
-              <BrandName className ='brand__name'><Link>{ brand.brandName || 'Le Labo' }</Link></BrandName>
-              <PerfumeName className ='perfume__name'>{ perfume.perfumeName || 'THe Nord29' }</PerfumeName>
-              <PerfumeGroup className ='perfume__group'>{ perfume.group || '木質辣'}</PerfumeGroup>
-              <CreatorName className ='creator__name'><Link>調香師 : { creator.creatorName || 'Alberto Morillas'}</Link></CreatorName>
+              <BrandName className ='brand__name'><Link to = { `/brand/${perfume.brandId}` } >{ brand.brandName }</Link></BrandName>
+              <PerfumeName className ='perfume__name'>{ perfume.perfumeName }</PerfumeName>
+              <PerfumeGroup className ='perfume__group'>{ perfume.group }</PerfumeGroup>
+              <CreatorName className ='creator__name'><Link to = { `/creator/${perfume.creatorId}` } >調香師 : { creator.creatorName }</Link></CreatorName>
             </BasicInfoContainer>
 
             <IngredientContainer>
-              { ingredient.length !==0 && ingredient.map(res => <IngredientItem key = { res } > {res} </IngredientItem>) }
+              { ingredient.length !== 0 && ingredient.map(res => <IngredientItem key = { res } > { res } </IngredientItem>) }
             </IngredientContainer>
 
-            {/* TODO:　這邊裡面的版要重切 */}
             <RecommendArea>
               <div className ='title'> 大家推薦的使用時機:</div>
               <Line/>
