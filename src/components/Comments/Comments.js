@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { selectUser } from "../../features/userReducer"
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/userReducer'
 
 import { Error } from '../general'
 import BlockPartition from '../BlockPartition'
@@ -8,7 +8,6 @@ import CommentInputArea from'./CommentInputArea'
 import CommentItem from'./CommentItem'
 import CommentEmptyMessage from'./CommentEmptyMessage'
 import EditComment from'../EditComment'
-
 import useGetComments from '../../hooks/commentHooks/useGetComments'
 import useUpdateComments from '../../hooks/commentHooks/useUpdateComments'
 

@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { COLOR } from "../../constants/style"
-import { BigCardWrapper, Button } from "../general"
+import { COLOR } from '../../constants/style'
+import { BigCardWrapper, Button } from '../general'
 
 const MessageContent = styled.div`
   text-align: left;

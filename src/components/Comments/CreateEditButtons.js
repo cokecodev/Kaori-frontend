@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { Button } from "../general"
-import { COLOR } from "../../constants/style"
+import styled from 'styled-components'
+import { Button } from '../general'
+import { COLOR } from '../../constants/style'
 
 const Edit = styled(Button)`
   color: gray;

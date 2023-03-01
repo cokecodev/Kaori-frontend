@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import { BigCardWrapper } from "../general"
-import { MEDIA_QUERY } from "../../constants/style"
+import styled from 'styled-components'
 
-import CreateEditButtons from "./CreateEditButtons"
+import { BigCardWrapper } from '../general'
+import { MEDIA_QUERY } from '../../constants/style'
+import CreateEditButtons from './CreateEditButtons'
 
 export const CommentWrapper = styled(BigCardWrapper)`
   display: flex;

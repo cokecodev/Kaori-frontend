@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { COLOR } from "../../constants/style"
-import { BigCardWrapper, Button, Error } from "../general"
+import styled from 'styled-components'
+import { COLOR } from '../../constants/style'
+import { BigCardWrapper, Button, Error } from '../general'
 
 const Form = styled.form`
   width: 100%;
