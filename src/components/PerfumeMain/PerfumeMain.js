@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom"
-import useGetOnePerfume from '../../hooks/perfumeHooks/useGetPerfumeData'
-import PerfumeBasicInfo from './PerfumeBasicInfo'
-import PerfumeShowVoteData from'./PerfumeShowVoteData'
-import Vote from'../Vote'
-import BlockPartition from '../BlockPartition'
-
-import { useEffect, useState } from "react"
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMe, selectUser } from '../../features/userReducer'
+
+import useGetOnePerfume from '../../hooks/perfumeHooks/useGetPerfumeData'
+import PerfumeBasicInfo from './PerfumeBasicInfo'
+import PerfumeShowVoteData from './PerfumeShowVoteData'
+import Vote from '../Vote'
+import BlockPartition from '../BlockPartition'
+
 
 export default function PerfumeMain() {
   const dispatch = useDispatch()
@@ -33,9 +34,6 @@ export default function PerfumeMain() {
     console.log('yo ')
   },[currentUser, dispatch])
   
-  // TODO: render 問題
-  //console.log('page perfumeMain',voteData)
-  //console.log('currentUser', currentUser)
 
   const handleToggleHidden = () => {
     setIsVoteHidden(!isVoteHidden)
@@ -49,22 +47,26 @@ export default function PerfumeMain() {
 
   return (
     <>
-    { currentUser !=='' && <Vote
-        currentUser = { currentUser }
-        ingredient = { ingredient }
-        perfumeId = { perfumeId }
-        isVoteHidden = { isVoteHidden }
-        setIsVoteHidden = { setIsVoteHidden }
-        handleToggleHidden = { handleToggleHidden }
-      />
-    }
-      <PerfumeBasicInfo
-        brand = { brand }
-        perfume = { perfume }
-        creator = { creator }
-        ingredient = { ingredient }
-        booleanVoteData = { booleanVoteData }
-      />
+      { currentUser && (
+        <Vote
+          currentUser = { currentUser }
+          ingredient = { ingredient }
+          perfumeId = { perfumeId }
+          isVoteHidden = { isVoteHidden }
+          setIsVoteHidden = { setIsVoteHidden }
+          handleToggleHidden = { handleToggleHidden }
+        />
+      )}
+
+      { perfume.length !== 0 && (
+        <PerfumeBasicInfo
+          brand = { brand }
+          perfume = { perfume }
+          creator = { creator }
+          ingredient = { ingredient }
+          booleanVoteData = { booleanVoteData }
+        />
+      )}
 
       <BlockPartition 
         subtitle = {'投票去'} 
