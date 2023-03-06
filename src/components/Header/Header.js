@@ -77,7 +77,6 @@ export default function Header() {
 
   const handleLogoutClick = () => {
     dispatch(logout())
-    alert('登出成功')
   }
 
   return (
