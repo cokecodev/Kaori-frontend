@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getMe, selectUser } from '../../features/userReducer'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/userReducer'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../constants/toastConfigs'
 
 import useGetOnePerfume from '../../hooks/perfumeHooks/useGetPerfumeData'
 import PerfumeBasicInfo from './PerfumeBasicInfo'
@@ -11,36 +13,24 @@ import BlockPartition from '../BlockPartition'
 
 
 export default function PerfumeMain() {
-  const dispatch = useDispatch()
   const currentUser = useSelector(selectUser)
   const perfumeId = Number(useParams().id)
   const [isVoteHidden, setIsVoteHidden] = useState(true)
   const {
     perfume,
-    fetchError,
     creator,
     brand,
     ingredient,
     voteData,
-    getPerfumeFetch,
-    getVoteFetch,
     booleanVoteData,
-    getBooleanVoteFetch,
   } = useGetOnePerfume(perfumeId)
-  
-  useEffect(() => {
-    if (currentUser) return
-    dispatch(getMe())
-    console.log('yo ')
-  },[currentUser, dispatch])
-  
 
   const handleToggleHidden = () => {
     setIsVoteHidden(!isVoteHidden)
   }
 
   const handelOpenVoteAreaClick = () => {
-    if(!currentUser) return alert('請先登入!')
+    if(!currentUser) return toast.warn('請先登入!', toastConfig)
     handleToggleHidden()
   }
 
