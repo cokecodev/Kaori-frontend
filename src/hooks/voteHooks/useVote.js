@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../constants/toastConfigs'
 import { getVoteByUserId, VoteForPerfume } from '../../WebAPI'
 
 export default function useVote(perfumeId, currentUser, handleToggleHidden) {
-  const [voteFetchError, setVoteFetchError] = useState([])
+  const dispatch = useDispatch()
   const [ingredientVote, setIngredientVote] = useState([])
   const [longevityVote, setLongevityVote] = useState([])
   const [genderVote, setGenderVote] = useState([])
@@ -18,11 +22,17 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
   useEffect(() => {
     if(!currentUser) return
 
-    setVoteFetchError(null)
+    dispatch(setIsLoading(true))
+    dispatch(setFetchError(null))
+
     getVoteByUserId(perfumeId)
       .then(res => {
+        if(res.data.ok === 0) {
+          dispatch(setIsLoading(false))
+          return toast.warn(res.data.message, toastConfig)
+        } 
+
         const voteData = res.data.data
-        //console.log('userVoteData', voteData)
         setGenderVote(voteData.gender)
         setSilageVote(voteData.silage)
         setLongevityVote(voteData.longevity)
@@ -34,37 +44,39 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
         setDayVote(voteData.day)
         setNightVote(voteData.night)
         
+        dispatch(setIsLoading(false))
       })
       .catch(err => {
-        console.log('get old vote ERR !', err.message)
-        setVoteFetchError(err.message)
+        console.log('get old vote ERR:', err.message.toString())
+        dispatch(setFetchError(err.message))
       })
   },[currentUser, perfumeId])
 
 
   // ----- function 們 -----
   const handleFinishButtonClick = (e) => {
-    if (isNewVote === false) { return handleToggleHidden() }
     const inputVoteObj = handleVoteObj()
+    if(isNewVote === false) return handleToggleHidden()
     if(inputVoteObj.longevity.length === 0 || inputVoteObj.silage.length === 0 || inputVoteObj.gender.length === 0 || inputVoteObj.ingredient.length === 0) {
-      return alert('最後三項為必投項目，最明顯的味道至少需投一種')
+      return toast.warn('最後三項為必投項目，最明顯的味道至少需投一種', toastConfig)
     }
+
+    dispatch(setIsLoading(true))
+    dispatch(setFetchError(null))
 
     VoteForPerfume(perfumeId, inputVoteObj)
       .then(res => {
-        // 投票失敗的話
         if(res.data.ok === 0) {
-          // TODO: 錯誤處理顯示位置
-          alert(res.data.message)
-          return 
+          dispatch(setIsLoading(false))
+          return toast.warn(res.data.message, toastConfig)
         }
-
-        // 投票成功
         setIsNewVote(false)
+        toast.success('投票成功', toastConfig)
+        dispatch(setIsLoading(false))
       })
       .catch(err => {
-        console.log('ERR', err.toString())
-        setVoteFetchError(err.message)
+        console.log('ERR:', err.message.toString())
+        dispatch(setFetchError(err.message))
       })
     
     handleToggleHidden()
@@ -230,8 +242,6 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
 
   
   return {
-    voteFetchError,
-    setVoteFetchError,
     ingredientVote,
     setIngredientVote,
     longevityVote,
