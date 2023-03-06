@@ -1,4 +1,7 @@
-import { useState } from "react"
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { toastConfig, errorToastConfig } from '../../constants/toastConfigs'
+
 import { updateComment } from '../../WebAPI'
 import checkIsInputAllBlank from '../../utils'
 
@@ -13,7 +16,7 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
   }
 
   const handleUpdateButtonClick = (commentId) => {
-    if (!commentId) return alert('出了點錯! 缺少 commendId')
+    if (!commentId) return toast.error('出了點錯! 缺少 commendId', errorToastConfig)
 
     let currentCommentData = comments.filter(comment => comment.id === commentId )
     setOriginComment(currentCommentData[0].content)
@@ -25,21 +28,18 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
     // TODO:setFetchError('')
     updateComment(perfumeId, commentId, payload)
       .then((res) => {
-        // 錯誤處理
         if(res.data.ok === 0) {
           //setFetchError(res.data.message)
-          alert(res.data.message)
-          return 
+          return toast.warn(res.data.message, toastConfig)
         }
 
-        // 新增成功的話
         setCurrentComment('')
         setOriginComment('')
         getCommentFetch()
-        alert('更新成功')
+        toast.success('修改成功', toastConfig)
       })
       .catch(err => {
-        console.log('ERR',err.toString())
+        console.log('ERR',err.message.toString())
         //setFetchError(err.message)
       })
   }
@@ -54,7 +54,7 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
     }
 
     if(checkIsInputAllBlank(currentComment)!== false) {
-      return alert('不能只輸入空白!')
+      return toast.warn('不能只輸入空白!', toastConfig)
     }
     
     // 內容有更動的話
