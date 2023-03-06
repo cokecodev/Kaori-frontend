@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { toastConfig, errorToastConfig } from '../../constants/toastConfigs'
+import { useDispatch } from 'react-redux'
+import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
 
 import { updateComment } from '../../WebAPI'
 import checkIsInputAllBlank from '../../utils'
 
 export default function useUpdateComments(perfumeId, comments, getCommentFetch) {
+  const dispatch = useDispatch()
   const [isUpdateHidden, setIsUpdateHidden] = useState(true)
   const [currentComment, setCurrentComment] = useState('')
   const [currentCommentId, setCurrentCommentId] = useState(0)
@@ -25,11 +28,13 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
   }
   
   const updateCommentFetch = (perfumeId, commentId, payload) => {
-    // TODO:setFetchError('')
+    dispatch(setIsLoading(true))
+    dispatch(setFetchError(null))
+
     updateComment(perfumeId, commentId, payload)
       .then((res) => {
         if(res.data.ok === 0) {
-          //setFetchError(res.data.message)
+          dispatch(setIsLoading(false))
           return toast.warn(res.data.message, toastConfig)
         }
 
@@ -37,10 +42,11 @@ export default function useUpdateComments(perfumeId, comments, getCommentFetch) 
         setOriginComment('')
         getCommentFetch()
         toast.success('修改成功', toastConfig)
+        dispatch(setIsLoading(false))
       })
       .catch(err => {
         console.log('ERR',err.message.toString())
-        //setFetchError(err.message)
+        dispatch(setFetchError(err.message))
       })
   }
 
