@@ -4,7 +4,9 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMe, selectUser } from '../../features/userReducer'
-import { getAllPerfume, selectPerfume } from '../../features/searchReducer'
+import { getAllPerfume } from '../../features/searchReducer'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -17,13 +19,14 @@ import BrandListPage from '../../pages/BrandListPage'
 import CreatorPage from '../../pages/CreatorPage'
 import CreatorListPage from '../../pages/CreatorListPage'
 import PerfumeListPage from '../../pages/PerfumeListPage'
+import Page404 from '../../pages/Page404'
+import Test from '../Test'
 
 
 export default function App() {
   const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
   useEffect(() => {
-    //console.log('APP RUN!')
     dispatch(getMe())
     dispatch(getAllPerfume())
     console.log('APP getME!')
@@ -31,6 +34,15 @@ export default function App() {
 
   return (
     <div className = 'App' >
+      <ToastContainer
+        position ='top-center'
+        newestOnTop = { false }
+        closeOnClick
+        rtl = { false }
+        pauseOnFocusLoss
+        draggable
+      />
+      
       <Router>
         <Header />
           <Routes>
@@ -43,6 +55,9 @@ export default function App() {
             <Route exact path = '/list/brand' element = {<BrandListPage />} />
             <Route exact path = '/list/creator' element = {<CreatorListPage />} />
             <Route exact path = '/list/perfume' element = {<PerfumeListPage />} />
+
+            <Route path = '/test' element = { <Test/> } />
+            <Route path = '*' element = { <Page404/> } />
           </Routes>
         <Footer />
       </Router>
