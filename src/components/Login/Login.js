@@ -1,9 +1,12 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, selectUser } from '../../features/userReducer'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../constants/toastConfigs'
 
 import { FloatCardWrapper, PageTitle, InputWrapper, LinkWrapper, LoginButton } from './styleForComponent'
 import useInputWithoutBlank from '../../hooks/useInputWithoutBlank'
+
 
 export default function Login() {
   const {value: username, handleChange: handleUsernameChange} = useInputWithoutBlank()
@@ -12,15 +15,15 @@ export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
-  if(currentUser) {
-    alert('現在是已登入狀態，若想切換使用者請先登出')
-    return navigate('/')
-  }
-  
 
   const handleLoginSubmit = (e) => {
     e.preventDefault()
-    if(!username || !password ) return alert('請完整填寫!')
+    if(currentUser) {
+      navigate('/')
+      return toast.warn('若想切換使用者請先登出~', toastConfig)
+    }
+
+    if(!username || !password ) return toast.warn('欄位請填好填滿~', toastConfig)
     const payload = {
       username,
       password
