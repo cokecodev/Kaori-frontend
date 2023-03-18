@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-
+import HashLoader from 'react-spinners/HashLoader'
+import { COLOR } from '../../constants/style'
 
 const LoadingWrapper = styled.div`
   position: fixed;
@@ -10,20 +11,21 @@ const LoadingWrapper = styled.div`
   z-index: 3;
   background: rgba(0, 0, 0, 0.8);
   display:flex;
-
-  & p {
-    font-size: 2rem;
-    margin: auto;
-    color:white;
-  }
 `
+const override = {
+  margin: 'auto',
+}
 
 export default function Loading() {
 
  
   return(
     <LoadingWrapper>
-      <p>Loading...</p>
+      <HashLoader
+        color = { COLOR.color2 }
+        cssOverride = { override }
+        size = { 70 }
+      />
     </LoadingWrapper>
   )
 }
