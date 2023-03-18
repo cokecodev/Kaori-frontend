@@ -70,4 +70,5 @@ export const PerfumePageWrapper = styled.div`
 // 56px Header / 50px Footer / 100px Footer margin / 100px FloatCardWrapper margin
 export const LoginPageWrapper = styled.div`
   height: calc(100vh - 56px - 50px - 200px);
+  min-height: calc(360px + 56px + 50px);
 `
