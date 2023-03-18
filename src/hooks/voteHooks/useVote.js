@@ -29,6 +29,7 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
       .then(res => {
         if(res.data.ok === 0) {
           dispatch(setIsLoading(false))
+          if (res.data.message === '還沒投票喔~') return
           return toast.warn(res.data.message, toastConfig)
         } 
 
