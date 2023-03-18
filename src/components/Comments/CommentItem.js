@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+import Animal from 'react-animals'
 
 import { BigCardWrapper } from '../general'
 import { MEDIA_QUERY } from '../../constants/style'
 import CreateEditButtons from './CreateEditButtons'
+import { handelAvatarName, handelAvatarColor } from './functions'
 
 export const CommentWrapper = styled(BigCardWrapper)`
   display: flex;
@@ -16,13 +18,14 @@ export const Avatar = styled.div`
   border-radius: 50%;
   overflow: hidden;
 
-  & img {
-    width: 100%;
-  }
-
   ${MEDIA_QUERY.mobile} {
     height: 70px;
     width: 70px;
+  }
+
+  & .v-animal-avatar {
+    width: 100%;
+    height: 100%;
   }
 `
 export const DataArea = styled.div`
@@ -64,11 +67,15 @@ const Timestamp = styled.div`
 `
 
 export default function CommentItem ({comment, handleCommentDelete, currentUser, handleUpdateButtonClick}) {
+  const authorId = comment.User.id
 
   return(
     <CommentWrapper>
       <Avatar>
-        <img className = 'photo__url'/>
+        <Animal
+          name = { handelAvatarName(authorId) }
+          color = { handelAvatarColor(authorId) }
+        />
       </Avatar>
       
       <DataArea>
