@@ -22,7 +22,7 @@ const handleIngredientNote = (arr, targetString) => {
 
 // function totalValue
 const handleTotalValue = (arr) => {
-  if (arr instanceof Array !== true) return console.log('Not arr ! from function handleTotalValue')
+  if (arr instanceof Array !== true) return //console.log('Not arr ! from function handleTotalValue')
   let total = 0
   arr.map(res => {
     total += Number(res.totalVote) // 這邊跟傳回來的資料 key name 相關

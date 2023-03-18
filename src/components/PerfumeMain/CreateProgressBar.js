@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 import { COLOR } from '../../constants/style' 
 
 import { handleItemNameTranslate } from '../../constants/perfumeSetting'
@@ -66,10 +66,10 @@ export default function CreateProgressBar ({arr, data, total}) {
           const translate = handleItemNameTranslate(res)
 
           return (
-              <DataItem key = { res } describe = { translate.describe|| null } className='data-item'>
+              <DataItem key = { res } describe = { translate.describe || null } className='data-item'>
               <Left>
                 <DataName>
-                  { translate.name|| res }
+                  { translate.name || res }
                 </DataName>
               </Left>
               <Right>

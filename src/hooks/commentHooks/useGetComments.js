@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../constants/toastConfigs'
+import { useDispatch } from 'react-redux'
+import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
+
 import { createComment, getComments, deleteComment } from '../../WebAPI'
 import useInput from '../../hooks/useInput'
+import checkIsInputAllBlank from '../../utils'
 
 export default function useGetComments(perfumeId) {
+  const dispatch = useDispatch()
   const [comments, setComments] = useState([])
-  const [fetchError, setFetchError] = useState(null)
   const { 
     value: newCommentContent, 
     setValue: setNewCommentContent, 
@@ -12,14 +18,17 @@ export default function useGetComments(perfumeId) {
   } = useInput()
 
   const getCommentFetch = () => {
-    setFetchError('')
+    dispatch(setIsLoading(true))
+    dispatch(setFetchError(null))
+
     getComments(perfumeId)
       .then(res => {
         setComments(res.data.data)
+        dispatch(setIsLoading(false))
       })
       .catch(err => {
-        console.log('ERR',err.toString())
-        setFetchError(err.message)
+        console.log('ERR:',err.message.toString())
+        dispatch(setFetchError(err.message))
       })
   }
 
@@ -30,11 +39,11 @@ export default function useGetComments(perfumeId) {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault()
-    setFetchError('')
+    if(!newCommentContent) return toast.warn('請完整填寫', toastConfig)
+    if(checkIsInputAllBlank(newCommentContent)!== false) return toast.warn('不能只輸入空白!', toastConfig)
 
-    if(!newCommentContent){
-      return alert('請完整填寫')
-    }
+    dispatch(setFetchError(null))
+    dispatch(setIsLoading(true))
 
     const payload = {
       content: newCommentContent,
@@ -43,42 +52,40 @@ export default function useGetComments(perfumeId) {
     // 送資料
     createComment(perfumeId, payload)
       .then((res) => {
-        // 錯誤處理
         if(res.data.ok === 0) {
-          setFetchError(res.data.message)
-          return 
+          dispatch(setIsLoading(false))
+          return toast.warn(res.data.message, toastConfig)
         }
 
-        // 新增成功的話
         setNewCommentContent('')
         getCommentFetch()
+        dispatch(setIsLoading(false))
+        toast.success('留言成功', toastConfig)
       })
       .catch(err => {
-        console.log('ERR',err.toString())
-        setFetchError(err.message)
+        console.log('ERR:',err.message.toString())
+        dispatch(setFetchError(err.message))
       })
   }
 
 
   const handleCommentDelete = (commentId) => {
+    dispatch(setIsLoading(true))
+    dispatch(setFetchError(null))
+
     deleteComment(perfumeId, commentId)
       .then(res => {
-        // TODO: loading 處理
-
-        // 失敗處理
-        // TODO: 錯誤資訊要顯示在哪?
         if(res.data.ok === 0) {
-          alert(res.data.message)
-          return
+          dispatch(setIsLoading(false))
+          return toast.warn(res.data.message, toastConfig)
         }
 
-        // 刪除成功
-        alert('刪除成功')
+        toast.success('刪除成功', toastConfig)
         getCommentFetch()
-
+        dispatch(setIsLoading(false))
       }).catch(err => {
-        // TODO: 錯誤資訊要顯示在哪?
-        console.log('ERR',err.toString())
+        console.log('ERR:', err.message.toString())
+        dispatch(setFetchError(err.message))
       })
     
   }
@@ -86,8 +93,6 @@ export default function useGetComments(perfumeId) {
   return {
     comments,
     setComments,
-    fetchError,
-    setFetchError,
     getCommentFetch,
     handleCommentDelete,
     handleCommentSubmit,

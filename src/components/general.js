@@ -34,3 +34,41 @@ export const Error = styled.div`
   font-size: 15px;
   margin: 6px;
 `
+
+let TITLE_COLOR = 'rgba(0,0,0,0.4)'
+export const PageDescribeTitle = styled.div`
+  color: ${TITLE_COLOR};
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-right: 5px;
+ 
+  &:before {
+    content:'';
+    background: ${TITLE_COLOR};
+    width: 10px;
+    height: 1.5rem;
+    display: inline-box;
+  }
+`
+
+export const PageSubTitle = styled.p`
+  color: gray;
+  font-size: 1rem;
+  margin-top: 1rem;
+`
+
+// 56px Header / 50px Footer / 100px Footer margin
+export const GeneralPageWrapper = styled.div`
+  min-height:calc(100vh - 56px - 50px - 100px);
+`
+
+// 56px Header / 50px Footer / 100px Footer margin / 15px ?margin
+export const PerfumePageWrapper = styled.div`
+  min-height:calc(100vh - 56px - 50px - 100px - 15px);
+`
+
+// 56px Header / 50px Footer / 100px Footer margin / 100px FloatCardWrapper margin
+export const LoginPageWrapper = styled.div`
+  height: calc(100vh - 56px - 50px - 200px);
+  min-height: calc(360px + 56px + 50px);
+`

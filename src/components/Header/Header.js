@@ -1,99 +1,104 @@
 import styled from 'styled-components'
-import { COLOR } from '../../constants/style'
-import { Button } from "../general"
+import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, selectUser } from '../../features/userReducer'
+
+import { COLOR, MEDIA_QUERY } from '../../constants/style'
+import { Button, WidthWrapper } from '../general'
+
 
 const HeaderContainer = styled.div`
   background: ${COLOR.color2};
   align-items: center;
   padding: 8px 0;
 `
-const Wrapper = styled.div`
+const Wrapper = styled(WidthWrapper)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  ${MEDIA_QUERY.middle_breakpoint} {
+    padding: 0 30px;
+  }
 `
 const LeftPart = styled.div`
   display: flex;
   align-items: baseline;
-  color: #3b4446;
   
-  & .siteLogo{
+  & .logo a {
     font-size: 30px;
     color: #3b4446;
   }
-
-  & .subNav {
-    margin-left: 1.5rem;
-    font-size: 0.85rem;
-  }
-
-  & .subNav span + span{
-    margin-left: 10px;
-  }
-
 `
-
 const RightPart = styled.div`
   align-items: center;
 
-  & input {
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    padding: 4px 0;
+  & span {
+    font-size: 0.85rem;
+    margin-right: 1rem;
 
-    ::placeholder { 
-      color: #aeb6b8;
-      font-size: 8px;
-      padding-left: 8px;
+    ${MEDIA_QUERY.middle_breakpoint} {
+      margin-right: 8px;
     }
-  }
 
-`
+    & a {
+      color: ${COLOR.color1};
+      margin-right: 5px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid ${COLOR.color2};
+    
+      &:hover {
+        color: white;
+      }
+    }
 
-const SpanLink = styled.a`
-  color: gray;
+    & a + a {
+      margin-left: 8px;
+  
+      ${MEDIA_QUERY.middle_breakpoint} {
+        margin-left: 4px;
+      }
+    }
 
-  &:hover {
-    color:red;
+    & a:hover {
+      border-bottom: 1px solid ${COLOR.color1};
+      transition: all 0.5s;
+    }
   }
 `
 
 export default function Header() {
+  const path = useLocation().pathname
   const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
 
   const handleLogoutClick = () => {
     dispatch(logout())
-    // TODO: 成功訊息要顯示在哪?
-    alert('登出成功')
   }
 
   return (
     <HeaderContainer>
       <Wrapper>
-        <LeftPart>
-          <span className='siteLogo'><Link to='/'>Kaori</Link></span>
-          <div className='subNav'>
-            <SpanLink>找香水</SpanLink>
-            <SpanLink>找品牌</SpanLink>
-          </div>
+        <LeftPart className = 'left-part'>
+          <span className = 'logo'><Link to = '/'>Kaori</Link></span>
         </LeftPart>
       
-        <RightPart>
-          { /* TODO:這裡要做API搜尋的功能*/}
-          <input name='search' placeholder='搜尋品牌或香水'/>
+        <RightPart className = 'right-part'>
+          <span className = 'subNav'>
+              { path !== '/list/creator' && <Link to = '/list/creator'>找調香師</Link> }
+              { path !== '/list/perfume' && <Link to = '/list/perfume'>找香水</Link> }
+              { path !== '/list/brand' &&  <Link to = '/list/brand'>找品牌</Link> }
+          </span>
 
           { currentUser && <Button onClick = { handleLogoutClick } >登出</Button> }
-          { !currentUser && <Link to='login'><Button>登入</Button></Link> }
+          { !currentUser && <Link to = 'login'><Button>登入</Button></Link> }
 
         </RightPart>
 
       </Wrapper>
     </HeaderContainer>
-  );
+  )
 }

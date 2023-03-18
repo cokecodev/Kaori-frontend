@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { COLOR } from "../../constants/style"
-import { BigCardWrapper, Button, Error } from "../general"
+import styled from 'styled-components'
+import { COLOR } from '../../constants/style'
+import { BigCardWrapper, Button } from '../general'
 
 const Form = styled.form`
   width: 100%;
@@ -20,20 +20,15 @@ const BigButton = styled(Button)`
   border: 1px solid ${COLOR.color3};
 `
 
-export default function CommentInputArea({handleCommentSubmit, newCommentContent, fetchError, handleValueChange}){
+export default function CommentInputArea({handleCommentSubmit, newCommentContent, handleValueChange}){
   return(
     <BigCardWrapper className='CommentInputArea'>
       <Form onSubmit = { handleCommentSubmit } >
         <Textarea 
-          placeholder='快來跟我們分享你的想法' 
+          placeholder ='快來跟我們分享你的想法' 
           value = { newCommentContent } 
           onChange = { handleValueChange } 
         />
-
-        {/* TODO: 顯示錯誤區塊待決定 */}
-        <Error>
-          { fetchError && '錯誤 :'} {fetchError}
-        </Error>
 
         <BigButton className='submit-btn'>送出留言</BigButton>
       </Form >

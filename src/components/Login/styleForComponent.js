@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { COLOR } from "../../constants/style"
+import styled from 'styled-components'
+import { COLOR } from '../../constants/style'
 
 export const FloatCardWrapper = styled.div`
   width: 300px;

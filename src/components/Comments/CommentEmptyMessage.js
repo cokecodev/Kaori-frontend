@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { COLOR } from "../../constants/style"
-import { BigCardWrapper, Button } from "../general"
+import { COLOR } from '../../constants/style'
+import { BigCardWrapper, Button } from '../general'
 
 const MessageContent = styled.div`
   text-align: left;
@@ -19,12 +19,14 @@ const ColorButton = styled(Button)`
   }
 `
 
-export default function CommentEmptyMessage() {
+export default function CommentEmptyMessage({currentUser}) {
   return(
     <BigCardWrapper>
       <MessageContent>
-        {`目前還沒有人留言喔~快來分享你的看法`}
-        <Link to='/login'><ColorButton>登入</ColorButton></Link>
+        { `目前還沒有人留言喔~快來分享你的看法` }
+        { !currentUser && (
+          <Link to = '/login' ><ColorButton>登入</ColorButton></Link>
+        )}
       </MessageContent>
     </BigCardWrapper>
   )

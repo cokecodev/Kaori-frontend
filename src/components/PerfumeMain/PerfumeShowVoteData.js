@@ -1,11 +1,11 @@
-import styled from "styled-components"
-import { COLOR, MEDIA_QUERY } from '../../constants/style' 
-import { WidthWrapper} from "../general"
-import { useMemo } from "react"
+import styled from 'styled-components'
+import { useMemo } from 'react'
 
-import CreateProgressBar from './CreateProgressBar'
+import { COLOR, MEDIA_QUERY } from '../../constants/style' 
 import { longArr, genderArr, silageArr } from '../../constants/perfumeSetting'
+import { WidthWrapper } from '../general'
 import { handleIngredientNote, handleTotalValue } from './functions'
+import CreateProgressBar from './CreateProgressBar'
 
 const VoteCardContainer = styled(WidthWrapper)`
   display: flex;
@@ -13,7 +13,6 @@ const VoteCardContainer = styled(WidthWrapper)`
   margin: 0 auto;
   font-size: 16px;
 `
-
 const VoteCard = styled.div`
   margin: 10px auto;
   border: 1px solid rgba(0,0,0,0.1);
@@ -41,7 +40,6 @@ const VoteCard = styled.div`
     }
   }
 `
-
 const Line = styled.div`
   border-bottom: 1.5px solid rgba(0,0,0,0.1);
   width: 100%;
@@ -49,8 +47,6 @@ const Line = styled.div`
 `
 
 export default function PerfumeShowVoteData({voteData, ingredient}) {
-  console.log('PerfumeShowVoteData',voteData)
-
   // 票數資料
   const longevityVoteArr = useMemo(() => voteData.longevity, [voteData]) // 資料型態 [{totalVote: 1, name: 'long'},{},{}]
   const genderVoteArr = useMemo(() => voteData.gender, [voteData])
@@ -75,7 +71,7 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
           <Line/>
           <div className ='item-container'>
-            { voteData.length!==0 && (
+            { voteData.length !== 0 && (
               <CreateProgressBar
                 arr = { ingredientArr }
                 data = { ingredientVoteArr }
@@ -91,7 +87,7 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
           <Line/>
           <div className ='item-container'>
-            { voteData.length!==0 && (
+            { voteData.length !== 0 && (
               <CreateProgressBar
                 arr = { genderArr } 
                 data = { genderVoteArr } 
@@ -107,7 +103,7 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
           <Line/>
           <div className ='item-container'>
-            { voteData.length!==0 && (
+            { voteData.length !== 0 && (
               <CreateProgressBar
                 arr = { longArr } 
                 data = { longevityVoteArr } 
@@ -123,7 +119,7 @@ export default function PerfumeShowVoteData({voteData, ingredient}) {
           </div>
           <Line/>
           <div className ='item-container'>
-            { voteData.length!==0 && (
+            { voteData.length !== 0 && (
               <CreateProgressBar
                 arr = { silageArr } 
                 data = { silageVoteArr } 

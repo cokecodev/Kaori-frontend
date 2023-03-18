@@ -1,75 +1,104 @@
-import styled from "styled-components"
-import { BigCardWrapper, Button } from "../general"
-import { Link } from "react-router-dom"
-import { COLOR } from "../../constants/style"
+import styled from 'styled-components'
+import Animal from 'react-animals'
 
-const CommentWrapper = styled(BigCardWrapper)`
+import { BigCardWrapper } from '../general'
+import { MEDIA_QUERY } from '../../constants/style'
+import CreateEditButtons from './CreateEditButtons'
+import { handelAvatarName, handelAvatarColor } from './functions'
+
+export const CommentWrapper = styled(BigCardWrapper)`
   display: flex;
   justify-content: space-between;
+  position: relative;
 `
-const Avatar = styled.div`
+export const Avatar = styled.div`
   background: rgba(0, 0, 0, 0.1);
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  overflow: hidden;
+
+  ${MEDIA_QUERY.mobile} {
+    height: 70px;
+    width: 70px;
+  }
+
+  & .v-animal-avatar {
+    width: 100%;
+    height: 100%;
+  }
 `
-const DataArea = styled.div`
+export const DataArea = styled.div`
   flex: 1;
   text-align: left;
   margin-left: 30px;
   font-family: 微軟正黑體;
-
-  & a + a {
-    margin-left: 8px;
-  }
 `
-const AuthorDataWrapper = styled.div`
+export const AuthorDataWrapper = styled.div`
   padding-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
-const Author = styled.span`
+export const LeftPartWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  ${MEDIA_QUERY.mobile} {
+    display: block;
+  }
+`
+export const Author = styled.div`
   font-size: 1.3rem;
   margin-right: 1rem;
+
+  ${MEDIA_QUERY.mobile} {
+    font-size: 18px;
+  }
 `
-const Timestamp = styled.span`
+const Timestamp = styled.div`
   font-size: 0.8rem;
   color: gray;
-`
-const Edit = styled(Button)`
-  color: gray;
-  border: 1px solid rgba(0,0,0,0.1);
 
-  &:hover {
-    color: white;
-    background:${COLOR.gray_light};
-    border: 1px solid ${COLOR.gray_light};
-    transition: all 0.3s;
+  ${MEDIA_QUERY.mobile} {
+    font-size: 12px;
+    margin-top: 5px;
   }
 `
 
-export default function CommentItem ({comment, handleCommentDelete}) {
+export default function CommentItem ({comment, handleCommentDelete, currentUser, handleUpdateButtonClick}) {
+  const authorId = comment.User.id
 
   return(
     <CommentWrapper>
       <Avatar>
-        <div/>
+        <Animal
+          name = { handelAvatarName(authorId) }
+          color = { handelAvatarColor(authorId) }
+        />
       </Avatar>
       
       <DataArea>
         <AuthorDataWrapper>
-          <div className = 'author__data'>
-            <Author>{comment.User.username}</Author>
+          <LeftPartWrapper className = 'author__data'>
+            <Author>{comment.User.nickname}</Author>
             <Timestamp>{new Date(comment.createdAt).toLocaleDateString()}</Timestamp>
-          </div>
-          <div className = 'author__edit'>
-            <Link><Edit>編輯</Edit></Link>
-            <Link><Edit onClick={() => handleCommentDelete(comment.id)}>刪除</Edit></Link>
+          </LeftPartWrapper>
+         
+          <div className = 'author__edit'>            
+            { currentUser && (
+                <CreateEditButtons
+                  comment = { comment }
+                  currentUser = { currentUser }
+                  handleCommentDelete = { handleCommentDelete }
+                  handleUpdateButtonClick = { handleUpdateButtonClick }
+                />
+              )
+            }
           </div>
         </AuthorDataWrapper>
 
-        <div className='comment__content'>
+        <div className ='comment__content'>
           {comment.content}
         </div>
 

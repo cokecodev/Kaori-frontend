@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 import { COLOR, MEDIA_QUERY } from '../../constants/style' 
 
 const RecommendItem = styled.span`
@@ -29,9 +29,7 @@ export default function CreateRecommendItem({item, handleIsActive, booleanVoteDa
   let isActive = (handleIsActive((item.id), booleanVoteData, booleanTotalVote))
    return(
     <>
-      {
-        isActive ? <RecommendItem id = { item.id }>{ item.name }</RecommendItem> : null
-      }
+      { isActive ? <RecommendItem id = { item.id }>{ item.name }</RecommendItem> : null }
     </>
   )
 }
