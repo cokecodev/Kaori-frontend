@@ -20,7 +20,6 @@ import CreatorPage from '../../pages/CreatorPage'
 import CreatorListPage from '../../pages/CreatorListPage'
 import PerfumeListPage from '../../pages/PerfumeListPage'
 import Page404 from '../../pages/Page404'
-import Test from '../Test'
 
 
 export default function App() {
@@ -56,7 +55,6 @@ export default function App() {
             <Route exact path = '/list/creator' element = {<CreatorListPage />} />
             <Route exact path = '/list/perfume' element = {<PerfumeListPage />} />
 
-            <Route path = '/test' element = { <Test/> } />
             <Route path = '*' element = { <Page404/> } />
           </Routes>
         <Footer />
