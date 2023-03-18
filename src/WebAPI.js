@@ -21,7 +21,7 @@ export const getVoteByUserId = (perfumeId) => instance.get(`/perfume/${perfumeId
 export const VoteForPerfume = (perfumeId, payload) => instance.post(`/perfume/${perfumeId}/vote`, payload)
 
 // comment
-export const getComments = (perfumeId) => instance.get(`/perfume/${perfumeId}/init`)
+export const getComments = (perfumeId) => instance.get(`/perfume/${perfumeId}/comment`)
 export const createComment = (perfumeId, payload) => instance.post(`/perfume/${perfumeId}/comment`, payload)
 export const updateComment = (perfumeId, commentId, payload) => instance.patch(`/perfume/${perfumeId}/comment/${commentId}`, payload)
 export const deleteComment = (perfumeId, commentId) => instance.delete(`/perfume/${perfumeId}/comment/${commentId}`)
