@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
+import { setIsLoading, setFetchError, setNewVoteFinished } from '../../features/fetchStatusReducer'
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../constants/toastConfigs'
 import { getVoteByUserId, VoteForPerfume } from '../../WebAPI'
@@ -74,6 +74,7 @@ export default function useVote(perfumeId, currentUser, handleToggleHidden) {
         setIsNewVote(false)
         toast.success('投票成功', toastConfig)
         dispatch(setIsLoading(false))
+        dispatch(setNewVoteFinished())
       })
       .catch(err => {
         console.log('ERR:', err.message.toString())
