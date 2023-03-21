@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIsLoading, setFetchError, selectNewVoteFinished } from '../../features/fetchStatusReducer'
 import { getVote, getVoteBoolean } from '../../WebAPI'
 
 export default function useGetVoteData(perfumeId) {
   const dispatch = useDispatch()
   const [voteData, setVoteData] = useState([])
   const [booleanVoteData, setBooleanVoteData] = useState([])
-
+  const newVoteFinished = useSelector(selectNewVoteFinished)
 
   const getVoteFetch = () => {
     dispatch(setIsLoading(true))
@@ -44,7 +44,7 @@ export default function useGetVoteData(perfumeId) {
   useEffect(() => {
     getVoteFetch()
     getBooleanVoteFetch()
-  },[])
+  },[newVoteFinished])
 
   return {
     voteData,

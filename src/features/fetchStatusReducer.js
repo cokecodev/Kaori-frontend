@@ -5,6 +5,7 @@ export const fetchStatusSlice = createSlice({
   initialState:{
     isLoading: false,
     fetchError: null,
+    newVoteFinished: 0,
   },
   
   reducers: {
@@ -15,10 +16,15 @@ export const fetchStatusSlice = createSlice({
     setFetchError:(state, action) => {
       state.fetchError = action.payload
     },
+
+    setNewVoteFinished:(state) => {
+      state.newVoteFinished += 1
+    },
   }
 });
 
-export const { setIsLoading, setFetchError } = fetchStatusSlice.actions;
+export const { setIsLoading, setFetchError, setNewVoteFinished } = fetchStatusSlice.actions;
 export const selectIsLoading = (state) => state.fetchStatus.isLoading;
 export const selectFetchError = (state) => state.fetchStatus.fetchError;
+export const selectNewVoteFinished = (state) => state.fetchStatus.newVoteFinished;
 export default fetchStatusSlice.reducer;
