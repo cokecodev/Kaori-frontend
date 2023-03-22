@@ -6,11 +6,13 @@ import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '
 
 import { getLatestFivePerfume } from '../../WebAPI'
 import { COLOR } from '../../constants/style'
-import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
+import { GeneralPageWrapper } from '../../components/general'
 import Banner from '../../components/Banner'
+import PageDescribeTitle from '../../components/PageDescribeTitle'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
 import Loading from '../../components/Loading'
 import ErrorMessage from '../../components/ErrorMessage'
+
 
 export default function HomePage() {
   const dispatch = useDispatch()
@@ -51,7 +53,9 @@ export default function HomePage() {
           searchType = 'perfume'
         />
 
-        <PageDescribeTitle> 最新加入的五款香水 </PageDescribeTitle>
+        <PageDescribeTitle
+          title = '最新加入的五款香水'
+        />
         
         { // perfume cards
           perfumes.length !== 0 && <HomePageCardsSection perfumes = { perfumes } />

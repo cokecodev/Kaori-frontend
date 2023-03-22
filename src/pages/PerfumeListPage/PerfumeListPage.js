@@ -6,8 +6,9 @@ import { selectIsLoading, selectFetchError } from '../../features/fetchStatusRed
 import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
+import PageDescribeTitle from '../../components/PageDescribeTitle'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
-import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
+import { GeneralPageWrapper } from '../../components/general'
 
 
 export default function PerfumeListPage() {
@@ -34,7 +35,9 @@ export default function PerfumeListPage() {
           searchType = 'perfume'
         />
 
-        <PageDescribeTitle> 香水列表 </PageDescribeTitle>
+        <PageDescribeTitle
+          title = '香水列表'
+        />
 
         { perfumeList.length !== 0 && <HomePageCardsSection perfumes = { perfumeList } /> }
       

@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,12 +7,10 @@ import { selectIsLoading, selectFetchError } from '../../features/fetchStatusRed
 import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
+import PageDescribeTitle from '../../components/PageDescribeTitle'
 import CreatorInfoCard from '../../components/CreatorInfoCard'
-import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
+import { GeneralPageWrapper } from '../../components/general'
 
-const TitleWithMargin = styled(PageDescribeTitle)`
-  margin-bottom: 50px;
-`
 
 export default function BrandPage() {
   const dispatch = useDispatch()
@@ -38,8 +35,9 @@ export default function BrandPage() {
           searchType = 'creator'
         />
 
-
-        <TitleWithMargin> 調香師列表 </TitleWithMargin>
+        <PageDescribeTitle
+          title = '調香師列表'
+        />
         
         { // creator cards
           creatorList.length !== 0 && creatorList.map( res => { 
