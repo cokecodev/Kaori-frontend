@@ -19,7 +19,9 @@ export default function BrandListPage() {
   const fetchError = useSelector(selectFetchError)
   
   useEffect(() => {
-    dispatch(getAllBrand())
+    return () => {
+      dispatch(getAllBrand())
+    }
   }, [])
 
 

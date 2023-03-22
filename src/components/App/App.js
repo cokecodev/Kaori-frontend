@@ -1,10 +1,9 @@
 import './App.css'
-
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMe, selectUser } from '../../features/userReducer'
-import { getAllPerfume } from '../../features/searchReducer'
+import { getAllPerfume, getAllBrand, getAllCreator } from '../../features/searchReducer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -28,6 +27,8 @@ export default function App() {
   useEffect(() => {
     dispatch(getMe())
     dispatch(getAllPerfume())
+    dispatch(getAllBrand())
+    dispatch(getAllCreator())
     console.log('APP getME!')
   },[dispatch])
 

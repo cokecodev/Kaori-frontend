@@ -19,7 +19,9 @@ export default function BrandPage() {
   const fetchError = useSelector(selectFetchError)
   
   useEffect(() => {
-    dispatch(getAllCreator())
+    return () => {
+      dispatch(getAllCreator())
+    }
   }, [])
 
 

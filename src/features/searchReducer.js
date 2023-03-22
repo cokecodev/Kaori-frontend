@@ -46,15 +46,13 @@ export const searchPerfume = (navigate, payload) => (dispatch) => {
   dispatch(setFetchError(null))
 
   searchPerfumeAPI(payload).then(res => {
-    if(res.data.ok !== 1) {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       perfumeList: res.data.data,
     }
-    dispatch(setPerfumeList(data))
+
+    if(res.data.ok === 1) dispatch(setPerfumeList(data))
     navigate('/list/perfume')
     dispatch(setIsLoading(false))
   }).catch(err => {
@@ -63,21 +61,19 @@ export const searchPerfume = (navigate, payload) => (dispatch) => {
   })
 }
 
-export const searchBrand = (payload) => (dispatch) => {
+export const searchBrand = (navigate, payload) => (dispatch) => {
   dispatch(setIsLoading(true))
   dispatch(setFetchError(null))
 
   searchBrandAPI(payload).then(res => {
-    if(res.data.ok !== 1) {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       brandList: res.data.data,
     }
 
-    dispatch(setBrandList(data))
+    if(res.data.ok === 1) dispatch(setBrandList(data))
+    navigate('/list/brand')
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
@@ -85,21 +81,19 @@ export const searchBrand = (payload) => (dispatch) => {
   })
 }
 
-export const searchCreator = (payload) => (dispatch) => {
+export const searchCreator = (navigate, payload) => (dispatch) => {
   dispatch(setIsLoading(true))
   dispatch(setFetchError(null))
 
   searchCreatorAPI(payload).then(res => {
-    if(res.data.ok !== 1) {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       creatorList: res.data.data,
     }
 
-    dispatch(setCreatorList(data))
+    if(res.data.ok === 1) dispatch(setCreatorList(data))
+    navigate('/list/creator')
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
@@ -112,15 +106,13 @@ export const getAllPerfume = () => (dispatch) => {
   dispatch(setFetchError(null))
 
   getAllPerfumeAPI().then(res => {
-    if(res.data.ok !== 1) {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       perfumeList: res.data.data,
     }
-    dispatch(setPerfumeList(data))
+
+    if(res.data.ok === 1) dispatch(setPerfumeList(data))
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
@@ -133,15 +125,13 @@ export const getAllBrand = () => (dispatch) => {
   dispatch(setFetchError(null))
 
   getAllBrandsAPI().then(res => {
-    if(res.data.ok !== 1)  {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       brandList: res.data.data,
     }
-    dispatch(setBrandList(data))
+
+    if(res.data.ok === 1) dispatch(setBrandList(data))
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
@@ -154,15 +144,13 @@ export const getAllCreator = () => (dispatch) => {
   dispatch(setFetchError(null))
 
   getAllCreatorsAPI().then(res => {
-    if(res.data.ok !== 1)  {
-      dispatch(setIsLoading(false))
-      return toast.warn(res.data.message, toastConfig)
-    }
+    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
       creatorList: res.data.data,
     }
-    dispatch(setCreatorList(data))
+
+    if(res.data.ok === 1) dispatch(setCreatorList(data))
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
