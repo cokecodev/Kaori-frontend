@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllCreator, selectCreatorList } from '../../features/searchReducer'
 import { selectIsLoading, selectFetchError } from '../../features/fetchStatusReducer'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import CreatorInfoCard from '../../components/CreatorInfoCard'
@@ -27,13 +28,14 @@ export default function BrandPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'C' }
-          titleColor = { 'white' }
-          title = { '來探索同頻的調香師吧 !' }
-          searchType = { 'creator' }
+          imgName = 'C'
+          titleColor = 'white'
+          title = '來探索同頻的調香師吧 !'
+          searchType = 'creator'
         />
 
 

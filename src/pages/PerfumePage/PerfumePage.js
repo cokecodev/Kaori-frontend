@@ -5,6 +5,7 @@ import { PerfumePageWrapper } from '../../components/general'
 import Comments from '../../components/Comments'
 import PerfumeMain from '../../components/PerfumeMain'
 import Loading from '../../components/Loading'
+import ErrorMessage from '../../components/ErrorMessage'
 
 
 export default function PerfumePage() {
@@ -13,6 +14,7 @@ export default function PerfumePage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <PerfumePageWrapper>
         <PerfumeMain />

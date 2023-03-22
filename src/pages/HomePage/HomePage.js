@@ -10,6 +10,7 @@ import { PageDescribeTitle, GeneralPageWrapper } from '../../components/general'
 import Banner from '../../components/Banner'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
 import Loading from '../../components/Loading'
+import ErrorMessage from '../../components/ErrorMessage'
 
 export default function HomePage() {
   const dispatch = useDispatch()
@@ -23,10 +24,7 @@ export default function HomePage() {
 
     getLatestFivePerfume()
       .then(res => {
-        if(res.data.ok !== 1) {
-          dispatch(setIsLoading(false))
-          return toast.warn(res.data.message, toastConfig)
-        }
+        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
         setPerfumes(res.data.data)
         dispatch(setIsLoading(false))
       })
@@ -43,6 +41,7 @@ export default function HomePage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner 
@@ -52,7 +51,7 @@ export default function HomePage() {
           searchType = 'perfume'
         />
 
-        <PageDescribeTitle> 最新加入的五款香水 </PageDescribeTitle>      
+        <PageDescribeTitle> 最新加入的五款香水 </PageDescribeTitle>
         
         { // perfume cards
           perfumes.length !== 0 && <HomePageCardsSection perfumes = { perfumes } />

@@ -5,6 +5,7 @@ import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../constants/toastConfigs'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import BrandInfoCard from '../../components/BrandInfoCard'
@@ -64,12 +65,13 @@ export default function BrandPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'G' }
-          title = { '與心儀的品牌相遇吧 !' }
-          searchType = { 'brand' }
+          imgName = 'G'
+          title = '與心儀的品牌相遇吧 !'
+          searchType = 'brand'
         />
         { brand.length !==0 && <BrandInfoCard brand = { brand } /> }
         

@@ -5,6 +5,7 @@ import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../constants/toastConfigs'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import CreatorInfoCard from '../../components/CreatorInfoCard'
@@ -63,12 +64,13 @@ export default function CreatorPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'G' }
-          title = { '來探索同頻的調香師吧 !' }
-          searchType = { 'creator' }
+          imgName = 'G'
+          title = '來探索同頻的調香師吧 !'
+          searchType = 'creator'
         />
         { creator.length !== 0 && <CreatorInfoCard creator = { creator } /> }
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllPerfume, selectPerfumeList } from '../../features/searchReducer'
 import { selectIsLoading, selectFetchError } from '../../features/fetchStatusReducer'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import HomePageCardsSection from '../../components/HomePageCardsSection'
@@ -23,13 +24,14 @@ export default function PerfumeListPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'C' }
-          titleColor = { 'white' }
-          title = { '找尋屬於你的味道' }
-          searchType = { 'perfume' }
+          imgName = 'C'
+          titleColor = 'white'
+          title = '找尋屬於你的味道'
+          searchType = 'perfume'
         />
 
         <PageDescribeTitle> 香水列表 </PageDescribeTitle>

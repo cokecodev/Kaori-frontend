@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllBrand, selectBrandList } from '../../features/searchReducer'
 import { selectIsLoading, selectFetchError } from '../../features/fetchStatusReducer'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import BrandInfoCard from '../../components/BrandInfoCard'
@@ -27,13 +28,14 @@ export default function BrandListPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage />}
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'C' }
-          titleColor = { 'white' }
-          title = { '與心儀的品牌相遇吧 !' }
-          searchType = { 'brand' }
+          imgName = 'F'
+          titleColor = 'white'
+          title = '與心儀的品牌相遇吧 !'
+          searchType = 'brand'
         />
 
         <TitleWithMargin> 品牌列表 </TitleWithMargin>
@@ -43,7 +45,7 @@ export default function BrandListPage() {
             let path = `/brand/${res.id}`
 
             return (
-              <Link to = { path } key = { res.id } >
+              <Link to = { path } key = { res.id }>
                 <BrandInfoCard 
                   brand = { res }
                 />
