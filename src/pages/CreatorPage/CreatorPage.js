@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
@@ -16,6 +16,7 @@ import { getPerfumeByCreatorId, getCreatorById } from '../../WebAPI'
 export default function CreatorPage() {
   const creatorId = Number(useParams().id)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const isLoading = useSelector(selectIsLoading)
   const fetchError = useSelector(selectFetchError)
   const [perfumes, setPerfumes] = useState([])
@@ -27,10 +28,7 @@ export default function CreatorPage() {
 
     getPerfumeByCreatorId(creatorId)
       .then(res => {
-        if(res.data.ok !== 1) {
-          dispatch(setIsLoading(false))
-          return toast.warn(res.data.message, toastConfig)
-        }
+        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
         setPerfumes(res.data.data)
         dispatch(setIsLoading(false))
       })
@@ -46,10 +44,9 @@ export default function CreatorPage() {
 
     getCreatorById(creatorId)
       .then(res => {
-        if(res.data.ok !== 1) {
-          dispatch(setIsLoading(false))
-          return toast.warn(res.data.message, toastConfig)
-        }
+        const creatorData = res.data.data
+        if(!creatorData) navigate('/404')
+        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
         setCreator(res.data.data)
         dispatch(setIsLoading(false))
       })
