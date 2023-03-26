@@ -1,12 +1,13 @@
 import './App.css'
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { getMe, selectUser } from '../../features/userReducer'
+import { useDispatch } from 'react-redux'
+import { getMe } from '../../features/userReducer'
 import { getAllPerfume, getAllBrand, getAllCreator } from '../../features/searchReducer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import { ScrollToTop } from '../../utils'
 import Header from '../Header'
 import Footer from '../Footer'
 import HomePage from '../../pages/HomePage'
@@ -22,7 +23,6 @@ import Page404 from '../../pages/Page404'
 
 
 export default function App() {
-  const currentUser = useSelector(selectUser)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getMe())
@@ -35,7 +35,7 @@ export default function App() {
   return (
     <div className = 'App' >
       <ToastContainer
-        position ='top-center'
+        position = 'top-center'
         newestOnTop = { false }
         closeOnClick
         rtl = { false }
@@ -45,6 +45,7 @@ export default function App() {
       
       <Router>
         <Header />
+        <ScrollToTop />
           <Routes>
             <Route exact path = '/' element = {<HomePage />} />
             <Route exact path = '/perfume/:id' element = {<PerfumePage />} />
