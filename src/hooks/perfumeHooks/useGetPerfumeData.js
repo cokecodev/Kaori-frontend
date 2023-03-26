@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
 
@@ -7,6 +8,7 @@ import useGetVoteData from './useGetVoteData'
 
 export default function useGetOnePerfume(perfumeId) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [perfume, setPerfume] = useState([])
   const [creator, setCreator] = useState([])
   const [brand, setBrand] = useState([])
@@ -30,6 +32,7 @@ export default function useGetOnePerfume(perfumeId) {
     getPerfumeById(perfumeId)
     .then(res => {
       const perfumeData = res.data.data
+      if (!perfumeData) navigate('/404')
       const handleIngredientDataForm = (perfumeData.ingredient).split(',')
       
       setPerfume(perfumeData)

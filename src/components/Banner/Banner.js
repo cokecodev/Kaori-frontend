@@ -2,9 +2,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { searchPerfume, searchBrand, searchCreator } from '../../features/searchReducer'
-
 import useInput from '../../hooks/useInput'
-
 
 const BannerWrapper = styled.div`
   background: ${props => props.imgName ? `url(/Banner/${props.imgName}.jpg) center/cover no-repeat` : 'gray' };
@@ -38,30 +36,17 @@ export default function Banner({ searchType, title, titleColor, imgName }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handlePerfumeSearchSubmit = (e) => {
+  const handleSearch = (searchFunc) => (e) => {
     e.preventDefault()
     const payload = {
       search: searchValue,
     }
-    dispatch(searchPerfume(navigate, payload))
+    dispatch(searchFunc(navigate, payload))
   }
 
-  const handleBrandSearchSubmit = (e) => {
-    e.preventDefault()
-    const payload = {
-      search: searchValue,
-    }
-    dispatch(searchBrand(payload))
-  }
-  
-  const handleCreatorSearchSubmit = (e) => {
-    const payload = {
-      search: searchValue,
-    }
-    dispatch(searchCreator(payload))
-    e.preventDefault()
-  }
-
+  const handlePerfumeSearchSubmit = handleSearch(searchPerfume)
+  const handleBrandSearchSubmit = handleSearch(searchBrand)
+  const handleCreatorSearchSubmit = handleSearch(searchCreator)
 
   return (
     <>

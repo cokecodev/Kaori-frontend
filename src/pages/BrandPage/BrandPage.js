@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../constants/toastConfigs'
 
+import ErrorMessage from '../../components/ErrorMessage'
 import Loading from '../../components/Loading'
 import Banner from '../../components/Banner'
 import BrandInfoCard from '../../components/BrandInfoCard'
@@ -16,6 +17,7 @@ import { GeneralPageWrapper } from '../../components/general'
 export default function BrandPage() {
   const brandId = Number(useParams().id)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const isLoading = useSelector(selectIsLoading)
   const fetchError = useSelector(selectFetchError)
   const [perfumes, setPerfumes] = useState([])
@@ -27,10 +29,7 @@ export default function BrandPage() {
 
     getPerfumeByBrandId(brandId)
       .then(res => {
-        if(res.data.ok !== 1) {
-          dispatch(setIsLoading(false))
-          return toast.warn(res.data.message, toastConfig)
-        }
+        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
         setPerfumes(res.data.data)
         dispatch(setIsLoading(false))
       })
@@ -46,11 +45,10 @@ export default function BrandPage() {
 
     getBrandById(brandId)
       .then(res => {
-        if(res.data.ok !== 1) {
-          dispatch(setIsLoading(false))
-          return toast.warn(res.data.message, toastConfig)
-        }
-        setBrand(res.data.data)
+        const brandData = res.data.data
+        if (!brandData) navigate('/404')
+        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
+        setBrand(brandData)
         dispatch(setIsLoading(false))
       })
       .catch(err => {
@@ -67,12 +65,13 @@ export default function BrandPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = { 'G' }
-          title = { '與心儀的品牌相遇吧 !' }
-          searchType = { 'brand' }
+          imgName = 'G'
+          title = '與心儀的品牌相遇吧 !'
+          searchType = 'brand'
         />
         { brand.length !==0 && <BrandInfoCard brand = { brand } /> }
         

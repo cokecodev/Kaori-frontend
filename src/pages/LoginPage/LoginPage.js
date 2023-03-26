@@ -4,6 +4,7 @@ import { selectIsLoading, selectFetchError } from '../../features/fetchStatusRed
 import { LoginPageWrapper } from '../../components/general'
 import Login from '../../components/Login'
 import Loading from '../../components/Loading'
+import ErrorMessage from '../../components/ErrorMessage'
 
 export default function LoginPage() {
   const isLoading = useSelector(selectIsLoading)
@@ -11,6 +12,7 @@ export default function LoginPage() {
 
   return (
     <>
+      { fetchError !== null && <ErrorMessage /> }
       { isLoading === true && <Loading /> }
       <LoginPageWrapper>
         <Login/>
