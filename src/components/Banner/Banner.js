@@ -36,30 +36,17 @@ export default function Banner({ searchType, title, titleColor, imgName }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handlePerfumeSearchSubmit = (e) => {
+  const handleSearch = (searchFunc) => (e) => {
     e.preventDefault()
     const payload = {
       search: searchValue,
     }
-    dispatch(searchPerfume(navigate, payload))
+    dispatch(searchFunc(navigate, payload))
   }
 
-  const handleBrandSearchSubmit = (e) => {
-    e.preventDefault()
-    const payload = {
-      search: searchValue,
-    }
-    dispatch(searchBrand(navigate, payload))
-  }
-  
-  const handleCreatorSearchSubmit = (e) => {
-    e.preventDefault()
-    const payload = {
-      search: searchValue,
-    }
-    dispatch(searchCreator(navigate, payload))
-  }
-
+  const handlePerfumeSearchSubmit = handleSearch(searchPerfume)
+  const handleBrandSearchSubmit = handleSearch(searchBrand)
+  const handleCreatorSearchSubmit = handleSearch(searchCreator)
 
   return (
     <>
