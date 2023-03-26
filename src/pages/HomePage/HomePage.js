@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoading, selectFetchError, setIsLoading, setFetchError } from '../../features/fetchStatusReducer'
 
 import { getLatestFivePerfume } from '../../WebAPI'
-import { COLOR } from '../../constants/style'
 import { GeneralPageWrapper } from '../../components/general'
 import Banner from '../../components/Banner'
 import PageDescribeTitle from '../../components/PageDescribeTitle'
@@ -48,8 +47,8 @@ export default function HomePage() {
       <GeneralPageWrapper>
         <Banner 
           title = 'Welcome to Kaori !'
-          titleColor = { `${COLOR.text_light}` }
-          imgName = 'J'
+          titleColor = 'white'
+          imgName = 'A'
           searchType = 'perfume'
         />
 

@@ -29,7 +29,7 @@ export default function PerfumeListPage() {
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = 'C'
+          imgName = 'B'
           titleColor = 'white'
           title = '找尋屬於你的味道'
           searchType = 'perfume'

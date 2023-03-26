@@ -31,7 +31,7 @@ export default function BrandPage() {
       { isLoading === true && <Loading /> }
       <GeneralPageWrapper>
         <Banner
-          imgName = 'C'
+          imgName = 'J'
           titleColor = 'white'
           title = '來探索同頻的調香師吧 !'
           searchType = 'creator'

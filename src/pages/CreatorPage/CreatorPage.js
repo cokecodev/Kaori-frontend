@@ -23,14 +23,17 @@ export default function CreatorPage() {
   const [perfumes, setPerfumes] = useState([])
   const [creator, setCreator] = useState([])
 
-  const getPerFumeByCreatorFetch = () => {
+  const fetchWithCreatorId = (apiCall, dataSetter, navigate) => {
     dispatch(setIsLoading(true))
     dispatch(setFetchError(null))
 
-    getPerfumeByCreatorId(creatorId)
+    apiCall(creatorId)
       .then(res => {
+        const result = res.data.data
+        if(!result) navigate()
         if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-        setPerfumes(res.data.data)
+        
+        dataSetter(result)
         dispatch(setIsLoading(false))
       })
       .catch(err => {
@@ -39,23 +42,8 @@ export default function CreatorPage() {
       })
   }
 
-  const getCreatorByIdFetch = () => {
-    dispatch(setIsLoading(true))
-    dispatch(setFetchError(null))
-
-    getCreatorById(creatorId)
-      .then(res => {
-        const creatorData = res.data.data
-        if(!creatorData) navigate('/404')
-        if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-        setCreator(res.data.data)
-        dispatch(setIsLoading(false))
-      })
-      .catch(err => {
-        console.log('ERR:',err.message.toString())
-        dispatch(setFetchError(err.message))
-      })
-  }
+  const getPerFumeByCreatorFetch = () => fetchWithCreatorId(getPerfumeByCreatorId, setPerfumes, ()=>{})
+  const getCreatorByIdFetch = () => fetchWithCreatorId(getCreatorById, setCreator, () => { navigate('/404') })
 
   useEffect(() => {
     getPerFumeByCreatorFetch()
@@ -69,6 +57,7 @@ export default function CreatorPage() {
       <GeneralPageWrapper>
         <Banner
           imgName = 'G'
+          titleColor = 'white'
           title = '來探索同頻的調香師吧 !'
           searchType = 'creator'
         />
