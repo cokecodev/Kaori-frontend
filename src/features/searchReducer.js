@@ -41,19 +41,19 @@ export const selectCreatorList = (state) => state.search.creatorList;
 export const selectBrandList = (state) => state.search.brandList;
 export default searchSlice.reducer;
 
-export const searchPerfume = (navigate, payload) => (dispatch) => {
+const fetchData = (payload, navigate, apiFunc, dataKey, dataSetter) => (dispatch) => {
   dispatch(setIsLoading(true))
   dispatch(setFetchError(null))
 
-  searchPerfumeAPI(payload).then(res => {
+  apiFunc(payload).then(res => {
     if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
 
     const data = { 
-      perfumeList: res.data.data,
+      [dataKey]: res.data.data,
     }
 
-    if(res.data.ok === 1) dispatch(setPerfumeList(data))
-    navigate('/list/perfume')
+    if(res.data.ok === 1) dispatch(dataSetter(data))
+    navigate()
     dispatch(setIsLoading(false))
   }).catch(err => {
     console.log('ERR', err.message.toString())
@@ -61,99 +61,9 @@ export const searchPerfume = (navigate, payload) => (dispatch) => {
   })
 }
 
-export const searchBrand = (navigate, payload) => (dispatch) => {
-  dispatch(setIsLoading(true))
-  dispatch(setFetchError(null))
-
-  searchBrandAPI(payload).then(res => {
-    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-
-    const data = { 
-      brandList: res.data.data,
-    }
-
-    if(res.data.ok === 1) dispatch(setBrandList(data))
-    navigate('/list/brand')
-    dispatch(setIsLoading(false))
-  }).catch(err => {
-    console.log('ERR', err.message.toString())
-    dispatch(setFetchError(err.message))
-  })
-}
-
-export const searchCreator = (navigate, payload) => (dispatch) => {
-  dispatch(setIsLoading(true))
-  dispatch(setFetchError(null))
-
-  searchCreatorAPI(payload).then(res => {
-    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-
-    const data = { 
-      creatorList: res.data.data,
-    }
-
-    if(res.data.ok === 1) dispatch(setCreatorList(data))
-    navigate('/list/creator')
-    dispatch(setIsLoading(false))
-  }).catch(err => {
-    console.log('ERR', err.message.toString())
-    dispatch(setFetchError(err.message))
-  })
-}
-
-export const getAllPerfume = () => (dispatch) => {
-  dispatch(setIsLoading(true))
-  dispatch(setFetchError(null))
-
-  getAllPerfumeAPI().then(res => {
-    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-
-    const data = { 
-      perfumeList: res.data.data,
-    }
-
-    if(res.data.ok === 1) dispatch(setPerfumeList(data))
-    dispatch(setIsLoading(false))
-  }).catch(err => {
-    console.log('ERR', err.message.toString())
-    dispatch(setFetchError(err.message))
-  })
-}
-
-export const getAllBrand = () => (dispatch) => {
-  dispatch(setIsLoading(true))
-  dispatch(setFetchError(null))
-
-  getAllBrandsAPI().then(res => {
-    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-
-    const data = { 
-      brandList: res.data.data,
-    }
-
-    if(res.data.ok === 1) dispatch(setBrandList(data))
-    dispatch(setIsLoading(false))
-  }).catch(err => {
-    console.log('ERR', err.message.toString())
-    dispatch(setFetchError(err.message))
-  })
-}
-
-export const getAllCreator = () => (dispatch) => {
-  dispatch(setIsLoading(true))
-  dispatch(setFetchError(null))
-
-  getAllCreatorsAPI().then(res => {
-    if(res.data.ok !== 1) toast.warn(res.data.message, toastConfig)
-
-    const data = { 
-      creatorList: res.data.data,
-    }
-
-    if(res.data.ok === 1) dispatch(setCreatorList(data))
-    dispatch(setIsLoading(false))
-  }).catch(err => {
-    console.log('ERR', err.message.toString())
-    dispatch(setFetchError(err.message))
-  })
-}
+export const searchPerfume = (navigate, payload) => fetchData(payload, () => navigate('/list/perfume'), searchPerfumeAPI, 'perfumeList', setPerfumeList)
+export const searchBrand = (navigate, payload) => fetchData(payload, () => navigate('/list/brand'), searchBrandAPI, 'brandList', setBrandList)
+export const searchCreator = (navigate, payload) => fetchData(payload, () => navigate('/list/creator'), searchCreatorAPI, 'creatorList', setCreatorList)
+export const getAllPerfume = () => fetchData(null, ()=>{}, getAllPerfumeAPI, 'perfumeList', setPerfumeList)
+export const getAllBrand = () => fetchData(null, ()=>{}, getAllBrandsAPI, 'brandList', setBrandList)
+export const getAllCreator = () => fetchData(null, ()=>{}, getAllCreatorsAPI, 'creatorList', setCreatorList)
