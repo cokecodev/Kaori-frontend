@@ -1,4 +1,8 @@
 # KAROI Frontend
+
+![](https://img.shields.io/badge/version-0.1.0-blue)
+[![](https://img.shields.io/badge/API%20Documentation-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
+
 > KAORI，讓香氣陪伴你的每一個重要時刻
 
 
@@ -12,14 +16,47 @@
 後端採用 Express、Sequelize 開發，部署在 heroku，並使用 clearDB 支援 MySQL 資料庫。
 
 ## 🏠 Pages
-- 👀 [**Demo**](https://kaori-frontend.netlify.app/)
 - [**Kaori Frontend repository**](https://github.com/cokecodev/Kaori-frontend)
 - [**Kaori Backend repository**](https://github.com/cokecodev/Kaori-backend)
-- User story | Notion
+- db structure (coming soon)
 - [API Documentation | Notion](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
 
-## Demo
+## 👀 [**Demo**](https://kaori-frontend.netlify.app/)
 
+### 搜尋系統
+- 任何的網頁使用者都可以針對**香水名稱、調香師名稱、品牌名稱**來搜尋，若找不到符合的品項，會跳出提醒。
+
+    ![](https://imgur.com/fZI3Ksl.gif)
+
+    ![](https://imgur.com/oHQmzVY.gif)
+
+---
+
+### 投票系統
+- 會員登入後，可以為每款香水投票 ( 每人每款只能投一筆，但可多次修改投票內容 )
+
+    ![](https://imgur.com/aTnJsfn.gif)
+
+- 如果投票項目不完整的話，會跳出提醒
+
+    ![](https://imgur.com/sjc7aLD.gif)
+
+---
+
+### 留言系統
+- 會員登入後，能夠留言，加入每款香水專屬的討論。
+
+    ![](https://imgur.com/FbvE8g8.gif)
+
+- 發現有錯字或亂說話不小心炎上了嗎 ? 別擔心 ! 登入後，作者**修改、刪除留言**都不是甚麼大問題 !
+
+    ![](https://imgur.com/i10ovPJ.gif)
+
+    ![](https://imgur.com/JSr9UQr.gif)
+
+- 網站管理員有權限可以**強制隱藏用戶的評論**，以防出現不當言論。
+
+    ![](https://i.imgur.com/E5YYmvK.gif)
 
 ## 使用技術及第三方套件
 - create react app → 建立專案環境
