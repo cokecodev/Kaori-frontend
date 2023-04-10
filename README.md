@@ -2,6 +2,7 @@
 
 ![](https://img.shields.io/badge/version-0.1.0-blue)
 [![](https://img.shields.io/badge/API%20Documentation-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
+[![](https://img.shields.io/badge/User%20Story-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-User-story-f0635b095f6c4e2b8cae52d104b81e13)
 
 > KAORI，讓香氣陪伴你的每一個重要時刻
 
@@ -19,17 +20,27 @@
 - [**Kaori Frontend repository**](https://github.com/cokecodev/Kaori-frontend)
 - [**Kaori Backend repository**](https://github.com/cokecodev/Kaori-backend)
 - db structure (coming soon)
+- [User Story | Notion](https://wise-vision-78f.notion.site/Kaori-User-story-f0635b095f6c4e2b8cae52d104b81e13)
 - [API Documentation | Notion](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
 
 ## 👀 [**Demo**](https://kaori-frontend.netlify.app/)
 
+> 管理員測試帳號：admin / 密碼：admin
+
+> 為維持良好的 Demo 體驗，請不要刪除不是自己新增的資料，謝謝!
+
 ### 搜尋系統
 - 任何的網頁使用者都可以針對**香水名稱、調香師名稱、品牌名稱**來搜尋，若找不到符合的品項，會跳出提醒。
 
-    ![](https://imgur.com/fZI3Ksl.gif)
+    ![](https://imgur.com/12Ojskg.gif)
 
-    ![](https://imgur.com/oHQmzVY.gif)
+    ![](https://imgur.com/v7mUNyU.gif)
 
+- 可以從品牌或調香師頁面找到所屬的香水列表
+
+    ![](https://imgur.com/RriCcRD.gif)
+
+    ![](https://imgur.com/nXvNUik.gif)
 ---
 
 ### 投票系統
@@ -132,3 +143,9 @@
  ┣ 📜store.js
  ┗ 📜utils.js
 ```
+
+## 資料來源 Resource
+- [ 香水資訊網站 Fragrantica](https://www.fragrantica.com/)
+
+## 聲明
+ 本網站僅作為個人練習用，註冊時請勿使用真實資料。另本網站所包含之圖片及內容僅做練習使用，不做任何商業用途。
