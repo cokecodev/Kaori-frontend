@@ -17,9 +17,10 @@
 後端採用 Express、Sequelize 開發，部署在 heroku，並使用 clearDB 支援 MySQL 資料庫。
 
 ## 🏠 Pages
+- 👀 [**Demo**](https://kaori-frontend.netlify.app/)
 - [**Kaori Frontend repository**](https://github.com/cokecodev/Kaori-frontend)
 - [**Kaori Backend repository**](https://github.com/cokecodev/Kaori-backend)
-- db structure (coming soon)
+- [db structure | DrawSQL](https://drawsql.app/teams/kaori/diagrams/kaori)
 - [User Story | Notion](https://wise-vision-78f.notion.site/Kaori-User-story-f0635b095f6c4e2b8cae52d104b81e13)
 - [API Documentation | Notion](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
 
