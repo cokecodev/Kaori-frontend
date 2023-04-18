@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/version-0.1.0-blue)
 [![](https://img.shields.io/badge/API%20Documentation-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-API-9d7f7e8a6caa447298bc33a8f676b306)
 [![](https://img.shields.io/badge/User%20Story-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-User-story-f0635b095f6c4e2b8cae52d104b81e13)
-[![](https://img.shields.io/badge/DB%20Structure-Yes-brightgreen)](https://wise-vision-78f.notion.site/Kaori-User-story-f0635b095f6c4e2b8cae52d104b81e13)
+[![](https://img.shields.io/badge/DB%20Structure-Yes-brightgreen)](https://drawsql.app/teams/kaori/diagrams/kaori)
 
 > KAORI，讓香氣陪伴你的每一個重要時刻
 
